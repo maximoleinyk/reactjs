@@ -1,11 +1,3 @@
-const param = `In ES5 this is not legal.`
+import App from './app/start';
 
-export default class A {
-  constructor(param) {
-    this.param = param;
-  }
-
-  getParam() {
-    return this.param;
-  }
-}
+App.start();
