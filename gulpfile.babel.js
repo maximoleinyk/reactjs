@@ -6,4 +6,4 @@ require('./build/scripts');
 require('./build/sass');
 require('./build/html');
 
-gulp.task('default', gulp.series('clean', 'validate', gulp.parallel('babel', 'styles')));
+gulp.task('default', gulp.series('clean', 'validate', gulp.parallel('scripts', 'styles')));

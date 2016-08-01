@@ -1,25 +1,21 @@
-const gulp = require('gulp');
-const sourcemaps = require('gulp-sourcemaps');
-const babel = require('gulp-babel');
-const browserify = require('gulp-browserify');
-const watchify = require('watchify');
-const babelify = require('babelify');
-const rename = require('gulp-rename');
-const source = require('vinyl-source-stream');
+import gulp from 'gulp';
+import sourcemaps from 'gulp-sourcemaps';
+import browserify from 'browserify';
+import babelify from 'babelify';
+import source from 'vinyl-source-stream';
 
-gulp.task('babel', () => {
-	return gulp.src('src/**/*.js')
-        .pipe(babel())
-        .pipe(gulp.dest('temp'));
+gulp.task('scripts', () => {
+	return browserify('src/js/config.js', { 
+        entries: ['./src/js/config.js'],
+        extensions: ['.jsx'],
+        paths: ['./bower_components/react/'],
+		debug: true
+	})
+	.transform(babelify.configure({
+		presets: ['es2015', 'react'],
+		ignore: 'bower_compoenets/'
+	}))
+	.bundle()
+	.pipe(source('bundle.js'))
+	.pipe(gulp.dest('src'));
 });
-
-gulp.task('browserify', () => {
-	return gulp.src('temp/js/config.js')
-        .pipe(browserify({
-            debug: true
-        }))
-        .pipe(rename('module.js'))
-        .pipe(gulp.dest('dist'));
-});
-
-gulp.task('scripts', gulp.series('babel', 'browserify'));

@@ -1,7 +1,10 @@
-const API = {
-    start() {
-        return 'Application started!';
-    }
-};
+import React from 'react';
+import ReactDom from 'react-dom';
 
-export default API;
+class Application extends React.Component {
+	render() {
+		return <div>Hello</div>
+	}
+}
+
+ReactDom.render(<Application />, document.querySelector('#app'));
