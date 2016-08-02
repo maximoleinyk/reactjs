@@ -1,6 +1,8 @@
-var gulp = require('gulp'),
-    del = require('del');
+import gulp from 'gulp';
+import del from 'del';
 
-gulp.task('clean', function() {
-  return del('dist');
-});
+export default (config) => {
+  gulp.task('clean', () => {
+    return del(config.paths.dist);
+  });
+}

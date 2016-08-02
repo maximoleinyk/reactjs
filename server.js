@@ -1,11 +1,11 @@
 var express = require('express');
 var app = express();
 
-app.use('/static', express.static(__dirname + '/src'));
+app.use('/static', express.static(__dirname + '/dist'));
 
 app.get('/page*', function(req, res) {
-	return res.sendFile('src/index.html', {
-		root: __dirname 
+	return res.sendFile('dist/index.html', {
+		root: __dirname
 	});
 });
 

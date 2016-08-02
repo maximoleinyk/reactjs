@@ -1,26 +1,28 @@
-var gulp = require('gulp'),
-    sass = require('gulp-sass'),
-    sourcemaps = require('gulp-sourcemaps'),
-    autoprefixer = require('gulp-autoprefixer'),
-    clean = require('gulp-clean-css'),
-    concat = require('gulp-concat');
+import gulp from 'gulp';
+import sass from 'gulp-sass';
+import sourcemaps from 'gulp-sourcemaps';
+import autoprefixer from 'gulp-autoprefixer';
+import clean from 'gulp-clean-css';
+import concat from 'gulp-concat';
 
-gulp.task('styles', function() {
-  return gulp.src([
-      'src/css/*.sass',
-      'src/css/**/*.sass',
-      'src/css/*.css',
-      'src/css/**/*.css',
-      '!src/css/all.css.map',
-      '!src/css/all.css'
-    ])
-    .pipe(sourcemaps.init())
-    .pipe(sass().on('error', sass.logError))
-    .pipe(autoprefixer({
-      browsers: ['last 2 versions']
-    }))
-    .pipe(concat('all.css'))
-    .pipe(clean())
-    .pipe(sourcemaps.write('./'))
-    .pipe(gulp.dest('src/css'));
-});
+export default (config) => {
+  gulp.task('sass', () => {
+    return gulp.src([
+        `${config.paths.css}/*.sass`,
+        `${config.paths.css}/**/*.sass`,
+        `${config.paths.css}/*.css`,
+        `${config.paths.css}/**/*.css`,
+        `!${config.paths.css}/all.css.map`,
+        `!${config.paths.css}/all.css`
+      ])
+      .pipe(sourcemaps.init())
+      .pipe(sass().on('error', sass.logError))
+      .pipe(autoprefixer({
+        browsers: ['last 2 versions']
+      }))
+      .pipe(concat('all.css'))
+      .pipe(clean())
+      .pipe(sourcemaps.write('./'))
+      .pipe(gulp.dest(config.paths.distCss));
+  });
+}
