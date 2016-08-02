@@ -5,11 +5,10 @@ import babelify from 'babelify';
 import source from 'vinyl-source-stream';
 
 gulp.task('scripts', () => {
-	return browserify('src/js/config.js', { 
-        entries: ['./src/js/config.js'],
-        extensions: ['.jsx'],
-        paths: ['./bower_components/react/'],
-		debug: true
+	return browserify('src/js/config.js', {
+      entries: ['./src/js/config.js'],
+			debug: true,
+      paths: ['./src/js', './bower_components/react']
 	})
 	.transform(babelify.configure({
 		presets: ['es2015', 'react'],

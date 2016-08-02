@@ -3,8 +3,12 @@ import ReactDom from 'react-dom';
 
 class Application extends React.Component {
 	render() {
-		return <div>Hello</div>
+		return <h1>Hello</h1>
 	}
 }
 
-ReactDom.render(<Application />, document.querySelector('#app'));
+export default {
+	start() {
+		ReactDom.render(<Application />, document.querySelector('#app'));
+	}
+};
