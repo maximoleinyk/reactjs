@@ -3,24 +3,37 @@ import sourcemaps from 'gulp-sourcemaps';
 import browserify from 'browserify';
 import babelify from 'babelify';
 import source from 'vinyl-source-stream';
+import aliasify from 'aliasify';
 
 export default (config) => {
 	const babelifyConfig = {
 		presets: [
 			'es2015',
 			'react'
-		]
+		],
+		compact: false
+	};
+	const aliasifyConfig = {
+		aliases: {
+			'react': `${config.paths.bower}/react/react`,
+			'react-dom': `${config.paths.bower}/react/react-dom`,
+			'app': `${config.paths.source}/js/app`,
+			'common': `${config.paths.source}/js/common`
+		}
 	};
 
 	gulp.task('compile:common', () => {
 		return browserify({
-				entries: ['src/js/main.js'],
-				paths: ['./src/js/', './bower_components/react/'],
-				debug: config.debug
+				entries: [config.files.startJs],
+				debug: config.debug,
+				include: [
+					aliasifyConfig.aliases.react
+				]
 		})
+		.transform({ global: true }, aliasify.configure(aliasifyConfig))
 		.transform(babelify.configure(babelifyConfig))
 		.bundle()
-		.pipe(source(`js/common.js`))
+		.pipe(source(`js/start.js`))
 		.pipe(gulp.dest(config.paths.dist));
 	});
 
@@ -30,9 +43,15 @@ export default (config) => {
 		gulp.task(taskName, () => {
 			return browserify({
 		      entries: [`${config.paths.modules}/${name}/${config.files.moduleFile}`],
+					ignore: [
+						aliasifyConfig.aliases.react,
+						aliasifyConfig.aliases['react-dom']
+					],
 					debug: config.debug
 			})
+			.transform({ global: true }, aliasify.configure(aliasifyConfig))
 			.transform(babelify.configure(babelifyConfig))
+			.transform(aliasify)
 			.bundle()
 			.pipe(source(`js/${name}/bundle.js`))
 			.pipe(gulp.dest(config.paths.dist));

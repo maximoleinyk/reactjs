@@ -1,1 +1,7 @@
-let a = 25;
+import React from 'react';
+
+export default class Application extends React.Component {
+	render() {
+		return <h1>Hello</h1>
+	}
+}
