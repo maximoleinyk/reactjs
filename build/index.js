@@ -11,7 +11,7 @@ module.exports = {
     gulp.task('process-assets', gulp.parallel('html', 'sass')); // build fonts, compile css etc.
     // gulp.task('watch', ['watch']); // for development only
 
-    gulp.task('verify', gulp.series('eslint'));
+    gulp.task('verify', gulp.series('flow', 'eslint'));
     // gulp.task('test', '');
     gulp.task('build', gulp.parallel('process-assets', gulp.series('babelify')));
     // gulp.task('deploy', '');

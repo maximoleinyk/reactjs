@@ -6,13 +6,6 @@ import source from 'vinyl-source-stream';
 import aliasify from 'aliasify';
 
 export default (config) => {
-	const babelifyConfig = {
-		presets: [
-			'es2015',
-			'react'
-		],
-		compact: false
-	};
 	const aliasifyConfig = {
 		aliases: {
 			'react': `${config.paths.bower}/react/react`,
@@ -31,7 +24,7 @@ export default (config) => {
 				]
 		})
 		.transform({ global: true }, aliasify.configure(aliasifyConfig))
-		.transform(babelify.configure(babelifyConfig))
+		.transform(babelify)
 		.bundle()
 		.pipe(source(`js/start.js`))
 		.pipe(gulp.dest(config.paths.dist));
@@ -50,7 +43,7 @@ export default (config) => {
 					debug: config.debug
 			})
 			.transform({ global: true }, aliasify.configure(aliasifyConfig))
-			.transform(babelify.configure(babelifyConfig))
+			.transform(babelify)
 			.transform(aliasify)
 			.bundle()
 			.pipe(source(`js/${name}/bundle.js`))

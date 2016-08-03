@@ -1,4 +1,11 @@
+/* @flow */
 import ReactDOM from 'react-dom';
-import Account from 'app/account/main';
+import React from 'react';
 
-ReactDOM.render(<Account />, document.querySelector('#app'));
+export default class Application extends React.Component {
+	render() {
+		return <h1>Hello</h1>
+	}
+}
+
+ReactDOM.render(<Application />, document.querySelector('#app'));
