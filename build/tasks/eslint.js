@@ -5,7 +5,8 @@ export default (config) => {
   gulp.task('eslint', () => {
     return gulp.src([
       `${config.paths.source}/js/**/*.js`,
-      `${config.paths.source}/js/*.js`
+      `${config.paths.source}/js/*.js`,
+			`!${config.paths.bower}/**/*.js`
     ])
       .pipe(eslint({
         configFile: '.eslintrc'
