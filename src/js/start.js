@@ -1,6 +1,6 @@
 /* @flow */
-import ReactDOM from 'react-dom';
 import React from 'react';
+import ReactDOM from 'react-dom';
 
 export default class Application extends React.Component {
 	render() {

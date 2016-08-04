@@ -9,7 +9,7 @@ tasks.register({
     css: './src/css',
     distCss: './dist/css',
     modules: './src/js/app',
-    bower: './bower_components'
+    bower: './src/js/vendor'
   },
   files: {
     indexHtml: './src/index.html',

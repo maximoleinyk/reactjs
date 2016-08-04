@@ -1,5 +1,9 @@
 [include]
 
 [ignore]
+.*/build
+.*/dist
+.*/node_modules
+.*/gulpfile.babel.js
 
 [options]

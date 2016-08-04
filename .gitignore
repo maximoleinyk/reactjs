@@ -1,10 +1,9 @@
 .git
 .idea
-
-node_modules
-bower_components
 dist
+node_modules
 temp
 
+src/js/vendor
 src/css/all.css.map
 src/css/all.css
