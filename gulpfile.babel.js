@@ -9,7 +9,8 @@ tasks.register({
     css: './src/css',
     distCss: './dist/css',
     modules: './src/js/app',
-    bower: './src/js/vendor'
+    bower: './src/js/vendor',
+		node: './node_modules'
   },
   files: {
     indexHtml: './src/index.html',

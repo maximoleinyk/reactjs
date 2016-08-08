@@ -10,6 +10,7 @@ export default (config) => {
 		aliases: {
 			'react': `${config.paths.bower}/react/react`,
 			'react-dom': `${config.paths.bower}/react/react-dom`,
+			'react-router': `${config.paths.node}/react-router/umd/ReactRouter`,
 			'app': `${config.paths.source}/js/app`,
 			'common': `${config.paths.source}/js/common`
 		}
