@@ -9,8 +9,7 @@ tasks.register({
     css: './src/css',
     distCss: './dist/css',
     modules: './src/js/app',
-    bower: './src/js/vendor',
-		node: './node_modules'
+    node: './node_modules'
   },
   files: {
     indexHtml: './src/index.html',
@@ -18,7 +17,6 @@ tasks.register({
     startJs: './src/js/start.js'
   },
   modules: [
-    'account',
-    'settings'
+    'account'
   ]
 });

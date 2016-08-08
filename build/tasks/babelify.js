@@ -8,8 +8,8 @@ import aliasify from 'aliasify';
 export default (config) => {
 	const aliasifyConfig = {
 		aliases: {
-			'react': `${config.paths.bower}/react/react`,
-			'react-dom': `${config.paths.bower}/react/react-dom`,
+			'react': `${config.paths.node}/react/dist/react`,
+			'react-dom': `${config.paths.node}/react-dom/dist/react-dom`,
 			'react-router': `${config.paths.node}/react-router/umd/ReactRouter`,
 			'app': `${config.paths.source}/js/app`,
 			'common': `${config.paths.source}/js/common`
@@ -18,12 +18,13 @@ export default (config) => {
 
 	gulp.task('compile:common', () => {
 		return browserify({
-				entries: [config.files.startJs],
-				debug: config.debug,
-				include: [
-					aliasifyConfig.aliases.react
-				]
+            entries: [config.files.startJs],
+            debug: true,
+            shim: {
+
+            }
 		})
+		.transform('browserify-shim')
 		.transform({ global: true }, aliasify.configure(aliasifyConfig))
 		.transform(babelify)
 		.bundle()
@@ -54,5 +55,5 @@ export default (config) => {
 		return taskName;
 	}));
 
-	gulp.task('babelify', gulp.series('compile:common', gulp.parallel(modules)));
+	gulp.task('babelify', gulp.series('compile:common'));
 }
