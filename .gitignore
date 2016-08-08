@@ -3,6 +3,8 @@
 dist
 node_modules
 temp
+npm-debug.log
+.DS_Store
 
 src/js/vendor
 src/css/all.css.map

@@ -1,1 +1,5 @@
-let prop = 'Exported as a shim dependency for main.js file';
+export default {
+	trim: (text) => {
+		return text.trim();
+	}
+};

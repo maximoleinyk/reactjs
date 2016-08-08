@@ -1,4 +1,4 @@
-/* @flow */
-import Greetings from 'app/account/main';
+import ReactDOM from 'react-dom';
+import Application from 'app/app';
 
-Greetings('Max');
+ReactDOM.render(<Application version="0.0.1"/>, document.querySelector('#app'));

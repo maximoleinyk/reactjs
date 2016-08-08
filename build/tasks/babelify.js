@@ -4,6 +4,8 @@ import browserify from 'browserify';
 import babelify from 'babelify';
 import source from 'vinyl-source-stream';
 import aliasify from 'aliasify';
+import watchify from 'watchify';
+import notify from 'gulp-notify';
 
 export default (config) => {
 	const aliasifyConfig = {
@@ -16,15 +18,47 @@ export default (config) => {
 		}
 	};
 
+	gulp.task('compile:vendor', () => {
+		let vendorBundler = browserify({
+			debug: true
+		})
+		.require(['react', 'react-dom']);
+
+		let clientBundler = watchify(browserify({
+			entries: [config.files.startJs],
+			extensions: ['.js', '.jsx'],
+			debug: true
+		}))
+		.transform({ global: true }, aliasify.configure(aliasifyConfig))
+		.transform(babelify)
+		.external(['react', 'react-dom']);
+
+		let rebundle = () => {
+			let start = Date.now();
+
+			return clientBundler.bundle()
+			.pipe(source('start.js'))
+			.pipe(gulp.dest('./dist/js'))
+			.pipe(notify(() => {
+				console.log('Built in ' + (Date.now() - start) + 'ms');
+			}));
+		};
+
+		clientBundler.on('update', rebundle);
+
+		vendorBundler.bundle()
+		.pipe(source('vendor.js'))
+		.pipe(gulp.dest('./dist/js'));
+
+		return rebundle();
+	});
+
 	gulp.task('compile:common', () => {
 		return browserify({
-            entries: [config.files.startJs],
-            debug: true,
-            shim: {
-
-            }
+			entries: [config.files.startJs],
+			extensions: ['.js', '.jsx'],
+			debug: true
 		})
-		.transform('browserify-shim')
 		.transform({ global: true }, aliasify.configure(aliasifyConfig))
 		.transform(babelify)
 		.bundle()
@@ -32,28 +66,5 @@ export default (config) => {
 		.pipe(gulp.dest(config.paths.dist));
 	});
 
-	let modules = gulp.parallel(config.modules.map((name) => {
-		let taskName = `compile:${name}`;
-
-		gulp.task(taskName, () => {
-			return browserify({
-		      entries: [`${config.paths.modules}/${name}/${config.files.moduleFile}`],
-					ignore: [
-						aliasifyConfig.aliases.react,
-						aliasifyConfig.aliases['react-dom']
-					],
-					debug: config.debug
-			})
-			.transform({ global: true }, aliasify.configure(aliasifyConfig))
-			.transform(babelify)
-			.transform(aliasify)
-			.bundle()
-			.pipe(source(`js/${name}/bundle.js`))
-			.pipe(gulp.dest(config.paths.dist));
-		});
-
-		return taskName;
-	}));
-
-	gulp.task('babelify', gulp.series('compile:common'));
+	gulp.task('babelify', gulp.series('compile:vendor'));
 }
