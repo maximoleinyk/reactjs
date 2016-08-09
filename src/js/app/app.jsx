@@ -1,6 +1,6 @@
-import React from 'react';
+import {Component} from 'react';
 
-export default class Application extends React.Component {
+export default class Application extends Component {
 	constructor() {
 		super();
 		this.state = {
