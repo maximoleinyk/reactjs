@@ -1,3 +1,3 @@
-var helpers = require('common/helpers');
+import helpers from 'common/helpers';
 
-var settings = true;
+console.log(helpers.trim('Settings'));

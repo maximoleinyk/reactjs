@@ -8,24 +8,13 @@ export default class Application extends Component {
 		};
 	}
 
-	componentWillMount() {
-		console.log('Will mount');
-	}
-
-	componentDidMount() {
-		console.log('Did mount');
-	}
-
-	componentWillUpdate() {
-		console.log('Will update');
-	}
-
-	componentDidUpdate() {
-		console.log('Did update');
-	}
-
-	componentWillReceiveProps() {
-		console.log('will receive props');
+	loadModules() {
+		require(['./account/main'], () => {
+			console.log('account module has been loaded');
+		});
+		require(['./settings/main'], () => {
+			console.log('settings module has been loaded');
+		});
 	}
 
 	render() {
@@ -33,6 +22,7 @@ export default class Application extends Component {
 			<div>
 				<h1>Welcome, {this.state.name}!</h1>
 				<p>Application version {this.props.version}</p>
+				<button onClick={this.loadModules.bind(this)}>Load me!</button>
 			</div>
 		);
 	}

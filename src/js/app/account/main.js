@@ -1,3 +1,3 @@
-var helpers = require('common/helpers');
+import helpers from 'common/helpers';
 
-var account = true;
+console.log(helpers.trim('Account'));

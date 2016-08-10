@@ -1,48 +1,51 @@
 var path = require('path'),
 		webpack = require('webpack');
 
+var dir = function(p) {
+	return path.resolve(__dirname, p);
+};
+
 module.exports = {
-	context: path.resolve(__dirname, './src'),
+	context: dir('./src'),
+
 	entry: {
 		start: './js/start.js',
-		account: './js/app/account/main.js',
-		settings: './js/app/settings/main.js',
 		common: [
 			'./js/common/helpers',
 			'./js/common/locale'
 		]
 	},
-	stats: {
-		colors: true,
-		reasons: true
-	},
+
 	output: {
-		publicPath: '/static',
-		path: path.resolve(__dirname, './dist/js'),
+		publicPath: '/static/js/',
+		path: dir('./dist/js'),
 		filename: '[name].js'
 	},
+
+	devtool: 'inline-source-map',
+
 	resolve: {
 		alias: {
-			app: path.resolve(__dirname, './src/js/app'),
-			common: path.resolve(__dirname, './src/js/common')
+			app: dir('./src/js/app'),
+			common: dir('./src/js/common')
 		},
 		modulesDirectories: [
-			'./node_modules'
+			'./node_modules',
+			'./src/js'
 		],
 		extensions: ['', '.js', '.jsx']
 	},
 
-  devtool: 'inline-source-map',
-
 	module: {
 		loaders: [
 			{
-				test: /.jsx?$/,
+				test: /(.jsx)|(.js)/,
 				loaders: ['babel-loader'],
 				exclude: /node_modules/
 			}
 		]
 	},
+
 	plugins: [
 		new webpack.ProvidePlugin({
 		  React: 'react',
