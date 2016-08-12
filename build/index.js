@@ -8,12 +8,11 @@ module.exports = {
       require('./tasks/' + task).default(config);
     });
 
-    gulp.task('process-assets', gulp.parallel('html', 'sass')); // build fonts, compile css etc.
-    // gulp.task('watch', ['watch']); // for development only
+    gulp.task('process-assets', gulp.parallel('sass')); // build fonts, compile css etc.
 
     gulp.task('verify', gulp.series('eslint'));
     // gulp.task('test', '');
-    gulp.task('build', gulp.parallel('process-assets', gulp.series('babelify')));
+    gulp.task('build', gulp.parallel('process-assets', gulp.series('transpile', 'html')));
     // gulp.task('deploy', '');
 
     gulp.task('default', gulp.series('clean', 'verify', 'build'));

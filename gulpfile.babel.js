@@ -3,18 +3,22 @@ import yargs from 'yargs';
 
 tasks.register({
   debug: !yargs.argv.production,
+	mainScriptName: 'start',
+	moduleName: 'main',
   paths: {
-    source: './src',
     dist: './dist',
-    css: './src/css',
     distCss: './dist/css',
-    modules: './src/js/app',
+		distJs: './dist/js',
+    src: './src',
+    css: './src/css',
     node: './node_modules'
   },
   files: {
     indexHtml: './src/index.html',
-    moduleFile: 'main.js',
-    startJs: './src/js/start.js'
+		manifest: './dist/js/manifest.json',
+		distIndexHtml: './dist/index.html',
+    startJs: './src/js/start.js',
+		webpackConfig: __dirname + '/webpack.config.js'
   },
   modules: [
     'account'

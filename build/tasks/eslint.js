@@ -4,8 +4,8 @@ import eslint from 'gulp-eslint';
 export default (config) => {
 	gulp.task('eslint', () => {
 		return gulp.src([
-			`${config.paths.source}/js/**/*.js`,
-			`${config.paths.source}/js/*.js`
+			`${config.paths.src}/js/**/*.js`,
+			`${config.paths.src}/js/*.js`
 		])
 		.pipe(eslint({
 			configFile: '.eslintrc'

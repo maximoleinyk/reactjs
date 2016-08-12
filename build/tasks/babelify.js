@@ -19,8 +19,8 @@ export default (config) => {
 				'react': `${config.paths.node}/react/dist/react`,
 				'react-dom': `${config.paths.node}/react-dom/dist/react-dom`,
 				'react-router': `${config.paths.node}/react-router/umd/ReactRouter`,
-				'app': `${config.paths.source}/js/app`,
-				'common': `${config.paths.source}/js/common`
+				'app': `${config.paths.src}/js/app`,
+				'common': `${config.paths.src}/js/common`
 			}
 		}))
 		.transform(babelify)

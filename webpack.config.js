@@ -1,25 +1,38 @@
 var path = require('path'),
-		webpack = require('webpack');
+		webpack = require('webpack'),
+		ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
 var dir = function(p) {
 	return path.resolve(__dirname, p);
 };
 
+var manifest = {
+	manifestVariable: 'manifest',
+	filename: 'manifest.json'
+};
+
 module.exports = {
 	context: dir('./src'),
+
+	manifest: manifest,
 
 	entry: {
 		start: './js/start.js',
 		common: [
 			'./js/common/helpers',
-			'./js/common/locale'
+			'./js/common/locale',
+			'react',
+			'react-dom',
+			'react-router',
+			'app/app'
 		]
 	},
 
 	output: {
-		publicPath: '/static/js/',
 		path: dir('./dist/js'),
-		filename: '[name].js'
+		publicPath: '/static/js/',
+    filename: '[name].[chunkhash].js',
+    chunkFilename: '[name].[chunkhash].js'
 	},
 
 	devtool: 'inline-source-map',
@@ -39,7 +52,7 @@ module.exports = {
 	module: {
 		loaders: [
 			{
-				test: /(.jsx)|(.js)/,
+				test: /\.(jsx|js)/,
 				loaders: ['babel-loader'],
 				exclude: /node_modules/
 			}
@@ -47,9 +60,12 @@ module.exports = {
 	},
 
 	plugins: [
-		new webpack.ProvidePlugin({
-		  React: 'react',
-			ReactDOM: 'react-dom'
-		})
+		new webpack.optimize.CommonsChunkPlugin({
+			name: 'common',
+			children: true,
+			minChunks: Infinity
+		}),
+		new ChunkManifestPlugin(manifest),
+		new webpack.optimize.OccurenceOrderPlugin()
 	]
 };
