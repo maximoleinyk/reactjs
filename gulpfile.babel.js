@@ -19,8 +19,5 @@ tasks.register({
 		distIndexHtml: './dist/index.html',
     startJs: './src/js/start.js',
 		webpackConfig: __dirname + '/webpack.config.js'
-  },
-  modules: [
-    'account'
-  ]
+  }
 });

@@ -1,5 +1,7 @@
-// entry point of the application
+import {browser} from 'common/browser';
 
-require(['app/app'], () => {
-	console.log('Application started!');
-});
+if (browser.isCompatible()) {
+	require(['app/app'], () => {
+		console.log('Application started!');
+	});
+}

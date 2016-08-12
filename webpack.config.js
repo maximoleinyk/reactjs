@@ -1,4 +1,5 @@
 var path = require('path'),
+		fs = require('fs'),
 		webpack = require('webpack'),
 		ChunkManifestPlugin = require('chunk-manifest-webpack-plugin');
 
@@ -19,13 +20,13 @@ module.exports = {
 	entry: {
 		start: './js/start.js',
 		common: [
-			'./js/common/helpers',
-			'./js/common/locale',
 			'react',
 			'react-dom',
 			'react-router',
 			'app/app'
-		]
+		].concat(fs.readdirSync(dir('./src/js/common')).map(function(name) {
+			return './js/common/' + name;
+		}))
 	},
 
 	output: {
