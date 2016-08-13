@@ -11,19 +11,19 @@ export default (config) => {
 			if (err) throw new gutil.PluginError("webpack", err);
 
 			gutil.log(stats.toString({
-				hash: false,
-				version: false,
-				timings: false,
-				assets: false,
+				hash: true,
+				version: true,
+				timings: true,
+				assets: true,
 				chunks: false,
 				modules: false,
-				reasons: false,
+				reasons: true,
 				children: true,
-				source: false,
-				errors: false,
-				errorDetails: false,
-				warnings: false,
-				publicPath: false
+				source: true,
+				errors: true,
+				errorDetails: true,
+				warnings: true,
+				publicPath: true
 			}));
 
 			callback();

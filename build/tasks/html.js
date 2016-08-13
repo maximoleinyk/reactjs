@@ -11,9 +11,9 @@ let getStartFileName = (config) => {
 
 export default (config) => {
 	const webpackConfig = require(config.files.webpackConfig);
-	const json = fs.readFileSync(`${config.paths.distJs}/${webpackConfig.manifest.filename}`);
 
   gulp.task('html', () => {
+		const json = fs.readFileSync(`${config.paths.distJs}/${webpackConfig.manifest.filename}`);
 		const startJs = getStartFileName(config);
 
     return gulp.src(config.files.indexHtml)

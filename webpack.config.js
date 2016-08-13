@@ -23,10 +23,10 @@ module.exports = {
 			'react',
 			'react-dom',
 			'react-router',
+			'history',
+			'jquery',
 			'app/app'
-		].concat(fs.readdirSync(dir('./src/js/common')).map(function(name) {
-			return './js/common/' + name;
-		}))
+		]
 	},
 
 	output: {

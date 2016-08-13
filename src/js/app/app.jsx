@@ -1,33 +1,46 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import {Route, Link, IndexRoute} from 'react-router'
+import React 		from 'react';
+import {render} from 'react-dom';
+import {Router} from 'react-router';
+import history 	from 'common/history';
+import Layout	 	from 'common/components/layout';
+import Dashboard 	from 'common/components/dashboard';
 
-class Application extends React.Component {
-	constructor() {
-		super();
-		this.state = {
-			name: 'User'
+class Application {
+	constructor(config) {
+		this.config = config || {
+			modules: []
 		};
+		this.routes = [
+			{
+		    path: '/page',
+		    component: Layout,
+				indexRoute: {
+					component: Dashboard
+				},
+		    getChildRoutes: this.getChildRoutes.bind(this)
+		  }
+		];
 	}
 
-	loadModules() {
-		require.ensure(['./account/main'], (require) => {
-			console.log(`account module has been loaded`);
-			require.ensure(['./settings/main'], () => {
-				console.log(`settings module has been loaded`);
+	getChildRoutes(state, callback) {
+		this.config.modules.forEach((name) => {
+			if (!location.pathname.startsWith('/page/' + name)) {
+				return;
+			}
+
+			require([`app/${name}/routes`], (module) => {
+				callback(null, module.default);
 			});
 		});
 	}
 
-	render() {
-		return (
-			<div>
-			<h1>Welcome, {this.state.name}!</h1>
-			<p>Application version {this.props.version}</p>
-			<button onClick={this.loadModules}>Load me!</button>
-			</div>
-		);
-	}
-}
+	start(modules) {
+		let router = <Router history={history} routes={this.routes}/>;
+		let $dom = document.querySelector('#app');
 
-ReactDOM.render(<Application version="0.0.1"/>, document.querySelector('#app'));
+		render(router, $dom);
+	}
+};
+
+// to avoid doing new app.defaults(); in start.js
+module.exports = Application;
