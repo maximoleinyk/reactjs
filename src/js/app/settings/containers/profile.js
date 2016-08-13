@@ -1,12 +1,15 @@
-import React from 'react';
-import Link from 'common/components/link';
+import Component from 'common/component';
 
-export default class ProfileSettings extends React.Component {
+export default class ProfileSettings extends Component {
+	openDashboard() {
+		this.navigateTo('/page');
+	}
+
 	render() {
 		return (
 			<div>
 				<p>Profile settings</p>
-				<Link to='/page'>Back home</Link>
+				<button onClick={this.openDashboard.bind(this)}>Back home</button>
 			</div>
 		);
 	}

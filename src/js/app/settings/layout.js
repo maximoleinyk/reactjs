@@ -1,14 +1,14 @@
-import React from 'react';
-import AppLink from 'common/components/link';
+import Component from 'common/component';
+import Link from 'common/components/link';
 
-export default class SettingsDashboard extends React.Component {
+export default class SettingsDashboard extends Component {
 	render() {
 		return (
 			<div className='page-content settings-layout'>
 				<nav>
 		    	<ul>
 						<li>
-							<AppLink to='/page/settings/profile'>Profile settings</AppLink>
+							<Link to='/page/settings/profile'>Profile settings</Link>
 						</li>
 					</ul>
 		    </nav>

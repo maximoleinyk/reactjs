@@ -16,7 +16,11 @@ module.exports = {
 	context: dir('./src'),
 
 	manifest: manifest,
-
+	externals: {
+	  //don't bundle the 'react' npm package with our bundle.js
+	  //but get it from a global 'React' variable
+	  // 'react': 'React'
+	},
 	entry: {
 		start: './js/start.js',
 		common: [
@@ -61,6 +65,11 @@ module.exports = {
 	},
 
 	plugins: [
+		new webpack.ProvidePlugin({
+			$: 'jquery',
+			React: 'react',
+			ReactDOM: 'react-dom'
+		}),
 		new webpack.optimize.CommonsChunkPlugin({
 			name: 'common',
 			children: true,

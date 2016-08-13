@@ -1,7 +1,7 @@
-import React from 'react';
-import AppLink from 'common/components/link';
+import Component from 'common/component';
+import Link from 'common/components/link';
 
-export default class AccountDashboard extends React.Component {
+export default class AccountDashboard extends Component {
 	render() {
 		return (
 			<div className='page-content account-layout'>
@@ -11,7 +11,7 @@ export default class AccountDashboard extends React.Component {
 				<nav>
 		    	<ul>
 						<li>
-							<AppLink to='/page'>Back home</AppLink>
+							<Link to='/page'>Back home</Link>
 						</li>
 					</ul>
 		    </nav>

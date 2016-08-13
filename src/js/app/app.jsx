@@ -1,4 +1,3 @@
-import React 		from 'react';
 import {render} from 'react-dom';
 import {Router} from 'react-router';
 import history 	from 'common/history';
@@ -37,7 +36,7 @@ class Application {
 			// if I repeate my code
 			// require(['app/account/routes'], ...)
 			// require(['app/settings/routes'], ...)
-			// it will work exactly as I expet but I want to make it dynamic 
+			// it will work exactly as I expet but I want to make it dynamic
 			//
 			require([`app/${name}/routes`], (module) => {
 				callback(null, module.default);
@@ -47,9 +46,9 @@ class Application {
 
 	start(modules) {
 		let router = <Router history={history} routes={this.routes}/>;
-		let $dom = document.querySelector('#app');
+		let $node = document.querySelector('#app');
 
-		render(router, $dom);
+		render(router, $node);
 	}
 };
 

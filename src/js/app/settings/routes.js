@@ -2,7 +2,7 @@ import Layout from './layout';
 import ProfileSettings from './containers/profile';
 
 export default {
-	path: '/page/settings',
+	path: 'settings',
 	component: Layout,
 	childRoutes: [
 		{
