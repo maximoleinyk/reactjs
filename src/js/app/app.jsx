@@ -27,18 +27,7 @@ class Application {
 				return;
 			}
 
-			// this will create only one bundle in dist/js directory
-			// but I need to keep them separate like:
-			//  app/
-			// 		account/1.bundle.js
-			//		settings/2.bundle.js
-			//
-			// if I repeate my code
-			// require(['app/account/routes'], ...)
-			// require(['app/settings/routes'], ...)
-			// it will work exactly as I expet but I want to make it dynamic
-			//
-			require([`app/${name}/routes`], (module) => {
+			require(`bundle!app/${name}/routes`)((module) => {
 				callback(null, module.default);
 			});
 		});

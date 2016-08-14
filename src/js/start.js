@@ -1,14 +1,17 @@
 import {browser} from 'common/browser';
 
+const config = {
+	modules: MODULES,
+	version: VERSION,
+	locale: LOCALE
+};
+
 if (browser.isCompatible()) {
 	require(['app/app'], (Application) => {
-		let app = new Application({
-			modules: [
-				'account',
-				'settings'
-			]
-		});
+		const app = new Application(config);
 
 		app.start();
 	});
 }
+
+module.exports = config;

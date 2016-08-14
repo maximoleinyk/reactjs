@@ -1,8 +1,9 @@
 import tasks from './build';
-import yargs from 'yargs';
+import args from 'yargs';
 
 tasks.register({
-  debug: !yargs.argv.production,
+  debug: !args.argv.production,
+	version: args.argv.version || 'DEV_VERSION',
 	mainScriptName: 'start',
 	moduleName: 'main',
   paths: {
@@ -18,6 +19,6 @@ tasks.register({
 		manifest: './dist/js/manifest.json',
 		distIndexHtml: './dist/index.html',
     startJs: './src/js/start.js',
-		webpackConfig: __dirname + '/webpack.config.js'
+		webpackConfig: __dirname + '/webpack.config.babel.js'
   }
 });

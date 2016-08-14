@@ -6,6 +6,8 @@ import webpack from 'webpack';
 export default (config) => {
 	const webpackConfig = require(config.files.webpackConfig);
 
+	webpackConfig.dynamic.version = config.version;
+
 	gulp.task('transpile', (callback) => {
 		webpack(webpackConfig, (err, stats) => {
 			if (err) throw new gutil.PluginError("webpack", err);
