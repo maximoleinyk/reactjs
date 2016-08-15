@@ -1,4 +1,4 @@
-import 'css/main.sass';
+import 'css/main.scss';
 
 import Component from 'common/component';
 import Link from 'common/components/link';

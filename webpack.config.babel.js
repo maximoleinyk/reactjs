@@ -41,19 +41,20 @@ module.exports = {
 	resolveLoader: {
 		modulesDirectories: ['node_modules'],
 		moduleTemplates: ['*-loader'],
-		extensions: ['', '.js']
+		extensions: ['', '.js', '.scss', '.css']
 	},
 
 	module: {
 		loaders: [
 			{
 				test: /\.(jsx|js)/,
-				loaders: ['babel'],
+				loaders: ['react-hot', 'babel'],
 				include: `${__dirname}/src/js`
 			},
 			{
-				test: /\.(sass|scss)$/,
-				loader: 'style!css!autoprefixer?browsers=last 2 version!sass'
+				test: /\.scss$/,
+				loader: 'style!css!autoprefixer?browsers=last 2 version!sass',
+				include: `${__dirname}/src/css`
 			}
 		]
 	},
