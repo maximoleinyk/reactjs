@@ -8,7 +8,7 @@ export default class SettingsDashboard extends Component {
 				<nav>
 		    	<ul>
 						<li>
-							<Link to='/page/settings/profile'>Profile settings</Link>
+							<Link to='/page/settings/profile'>Settings</Link>
 						</li>
 					</ul>
 		    </nav>

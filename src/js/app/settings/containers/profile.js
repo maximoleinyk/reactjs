@@ -28,7 +28,7 @@ export default class ProfileSettings extends Component {
 		}, 1000);
 	}
 
-	compoentWillUnmount() {
+	componentWillUnmount() {
 		clearInterval(this.timer);
 	}
 

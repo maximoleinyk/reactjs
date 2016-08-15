@@ -10,21 +10,21 @@ let getStartFileName = (config) => {
 };
 
 export default (config) => {
-	const webpackConfig = require(config.files.webpackConfig);
+	// const webpackConfig = require(config.files.webpackConfig);
 
   gulp.task('html', () => {
-		const json = fs.readFileSync(`${config.paths.distJs}/${webpackConfig.dynamic.filename}`);
-		const startJs = getStartFileName(config);
+		// const json = fs.readFileSync(`${config.paths.distJs}/${webpackConfig.dynamic.filename}`);
+		// const startJs = getStartFileName(config);
 
     return gulp.src(config.files.indexHtml)
-			.pipe(replace({
-					js: `
-						<script>
-							window.${webpackConfig.dynamic.manifestVariable} = ${json};
-						</script>
-						<script src="${webpackConfig.output.publicPath}${startJs}"></script>
-					`
-			}))
+			// .pipe(replace({
+			// 		js: `
+			// 			<script>
+			// 				window.${webpackConfig.dynamic.manifestVariable} = ${json};
+			// 			</script>
+			// 			<script src="${webpackConfig.output.publicPath}${startJs}"></script>
+			// 		`
+			// }))
       .pipe(htmlmin({
         removeComments: true,
         collapseWhitespace: true,

@@ -15,7 +15,7 @@ module.exports = {
 	context: `${__dirname}/src`,
 
 	entry: {
-		start: './js/start.js'
+		start: './js/start'
 	},
 
 	devtool: 'source-map',
@@ -24,12 +24,13 @@ module.exports = {
 		path: `${__dirname}/dist/js`,
 		publicPath: `/static/js/`,
 		library: 'about', // wrap start.js with about variable
-		filename: '[name].[chunkhash].js',
-		chunkFilename: '[name].[chunkhash].js'
+		filename: '[name].js?hash=[hash]',
+		chunkFilename: '[name].js?hash=[hash]'
 	},
 
 	resolve: {
 		alias: {
+			css: `${__dirname}/src/css`,
 			app: `${__dirname}/src/js/app`,
 			common: `${__dirname}/src/js/common`
 		},
@@ -48,7 +49,11 @@ module.exports = {
 			{
 				test: /\.(jsx|js)/,
 				loaders: ['babel'],
-				exclude: /node_modules/
+				include: `${__dirname}/src/js`
+			},
+			{
+				test: /\.(sass|scss)$/,
+				loader: 'style!css!autoprefixer?browsers=last 2 version!sass'
 			}
 		]
 	},
@@ -67,11 +72,20 @@ module.exports = {
 		}),
 		new webpack.NoErrorsPlugin(),
 		// production use
-		new ChunkManifestPlugin({
-			manifestVariable: dynamic.manifestVariable,
-			filename: dynamic.filename,
-		}),
+		// new ChunkManifestPlugin({
+		// 	manifestVariable: dynamic.manifestVariable,
+		// 	filename: dynamic.filename,
+		// }),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin()
-	]
+	],
+
+	devServer: {
+		host: 'localhost',
+		port: '8080',
+		proxy: {
+			'/page*': 'http://localhost:3000'
+		},
+		hot: true
+	}
 };

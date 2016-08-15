@@ -9,7 +9,6 @@ const config = {
 if (browser.isCompatible()) {
 	require(['app/app'], (Application) => {
 		const app = new Application(config);
-
 		app.start();
 	});
 }
