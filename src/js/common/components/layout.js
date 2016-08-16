@@ -1,3 +1,5 @@
+import 'css/main';
+
 import Component from 'common/component';
 
 export default class Application extends Component {

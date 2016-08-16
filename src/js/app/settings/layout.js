@@ -1,3 +1,5 @@
+import 'css/profile';
+
 import Component from 'common/component';
 import Link from 'common/components/link';
 

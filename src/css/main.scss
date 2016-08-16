@@ -1,35 +1,4 @@
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-}
+@import '~bootstrap/scss/bootstrap';
+@import '~font-awesome/scss/font-awesome';
 
-body {
-	background-color: black;
-}
-
-h1, h2 {
-	padding-top: 0;
-	margin-top: 0;
-}
-
-.layout-container {
-	margin: 20px;
-	background-color: #eaf0ce;
-	padding: 20px;
-}
-
-.module-wrapper {
-	padding: 20px;
-	background-color: #c0c5c1;
-}
-
-.page-content {
-	padding: 20px;
-	background-color: #7d8491;
-}
-
-.component-wrapper {
-	padding: 20px;
-	background-color: #574060
-}
+@import "./layout";

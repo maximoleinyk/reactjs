@@ -1,10 +1,12 @@
+import 'css/account';
+
 import Component from 'common/component';
 import Link from 'common/components/link';
 
 export default class AccountDashboard extends Component {
 	render() {
 		return (
-			<div className='page-content account-layout'>
+			<div className='account'>
 				<header>
 		    	<h1>Account page layout</h1>
 		    </header>

@@ -2,12 +2,11 @@ import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
-import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
 const dynamic = {
-	manifestVariable: 'manifest',
-	filename: 'manifest.json',
-	version: 'DEVELOPMENT'
+	version: 'DEVELOPMENT',
+	locale: 'ru'
 };
 
 module.exports = {
@@ -22,11 +21,11 @@ module.exports = {
 	devtool: 'source-map',
 
 	output: {
-		path: `${__dirname}/dist/js`,
-		publicPath: `/static/js/`,
+		path: `${__dirname}/dist/`,
+		publicPath: `/static/`,
 		library: 'about', // wrap start.js with about variable
-		filename: '[name].js?hash=[hash]',
-		chunkFilename: '[name].js?hash=[hash]'
+		filename: 'js/[name].js?hash=[hash]',
+		chunkFilename: 'js/[name].js?hash=[hash]'
 	},
 
 	resolve: {
@@ -36,7 +35,7 @@ module.exports = {
 			common: `${__dirname}/src/js/common`
 		},
 		modulesDirectories: ['node_modules', 'src/js'],
-		extensions: ['', '.js', '.jsx']
+		extensions: ['', '.js', '.jsx', '.scss']
 	},
 
 	resolveLoader: {
@@ -46,15 +45,34 @@ module.exports = {
 	},
 
 	module: {
-		loaders: [{
-			test: /\.(jsx|js)/,
-			loaders: ['react-hot', 'babel'],
-			include: `${__dirname}/src/js`
-		}, {
-			test: /\.scss$/,
-			loader: 'style!css!postcss?sourceMap=inline?sass',
-			include: `${__dirname}/src/css`
-		}]
+		loaders: [
+			// js
+			{
+				test: /\.(jsx|js)$/,
+				loaders: ['react-hot', 'babel'],
+				include: `${__dirname}/src/js`
+			},
+			// scss
+			{
+				test: /\.scss$/,
+				loader: 'style!css!postcss!sass?sourceMap',
+				include: `${__dirname}/src/css`
+			},
+			{
+				test: /\.scss$/,
+				loader: ExtractTextPlugin.extract("css!postcss!sass?data=$fa-font-path: \"~font-awesome/fonts\";")
+			},
+			// fonts
+			{
+				test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
+				loader: `file?name=fonts/[name].[ext]`,
+				include: `${__dirname}/node_modules/font-awesome/fonts`
+			}
+		]
+	},
+
+	sassLoader: {
+		data: '$fa-font-path: "~font-awesome/fonts";'
 	},
 
 	postcss() {
@@ -69,18 +87,16 @@ module.exports = {
 				'account', 'settings'
 			]),
 			VERSION: JSON.stringify(dynamic.version),
-			LOCALE: JSON.stringify('ru')
+			LOCALE: JSON.stringify(dynamic.locale)
 		}),
-		new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, /ru/),
+		new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, new RegExp(dynamic.locale)),
 		new webpack.ProvidePlugin({
 			React: 'react'
 		}),
+		new ExtractTextPlugin('css/styles.css', {
+			allChunks: true
+		}),
 		new webpack.NoErrorsPlugin(),
-		// production use
-		// new ChunkManifestPlugin({
-		// 	manifestVariable: dynamic.manifestVariable,
-		// 	filename: dynamic.filename,
-		// }),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin()
 	],
