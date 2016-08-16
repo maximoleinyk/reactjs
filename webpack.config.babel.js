@@ -1,6 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
 import ChunkManifestPlugin from 'chunk-manifest-webpack-plugin';
 
 const dynamic = {
@@ -45,18 +46,21 @@ module.exports = {
 	},
 
 	module: {
-		loaders: [
-			{
-				test: /\.(jsx|js)/,
-				loaders: ['react-hot', 'babel'],
-				include: `${__dirname}/src/js`
-			},
-			{
-				test: /\.scss$/,
-				loader: 'style!css!autoprefixer?browsers=last 2 version!sass',
-				include: `${__dirname}/src/css`
-			}
-		]
+		loaders: [{
+			test: /\.(jsx|js)/,
+			loaders: ['react-hot', 'babel'],
+			include: `${__dirname}/src/js`
+		}, {
+			test: /\.scss$/,
+			loader: 'style!css!postcss?sourceMap=inline?sass',
+			include: `${__dirname}/src/css`
+		}]
+	},
+
+	postcss() {
+		return [autoprefixer({
+			browsers: ['last 2 version']
+		})];
 	},
 
 	plugins: [
