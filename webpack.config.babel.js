@@ -58,10 +58,10 @@ module.exports = {
 				loader: 'style!css!postcss!sass?sourceMap',
 				include: `${__dirname}/src/css`
 			},
-			{
-				test: /\.scss$/,
-				loader: ExtractTextPlugin.extract("css!postcss!sass?data=$fa-font-path: \"~font-awesome/fonts\";")
-			},
+			// {
+			// 	test: /\.scss$/,
+			// 	loader: ExtractTextPlugin.extract("css!postcss!sass?data=$fa-font-path: \"~font-awesome/fonts\";", {disabled: true})
+			// },
 			// fonts
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
@@ -93,9 +93,9 @@ module.exports = {
 		new webpack.ProvidePlugin({
 			React: 'react'
 		}),
-		new ExtractTextPlugin('css/styles.css', {
-			allChunks: true
-		}),
+		// new ExtractTextPlugin('css/styles.css', {
+		// 	allChunks: true
+		// }),
 		new webpack.NoErrorsPlugin(),
 		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin()

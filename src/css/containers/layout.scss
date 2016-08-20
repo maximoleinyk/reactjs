@@ -1,3 +1,11 @@
+.selected {
+	color: red;
+
+	&:hover {
+		color: red;
+	}
+}
+
 .layout-container {
 	margin: 20px;
 	background-color: #eaf0ce;
