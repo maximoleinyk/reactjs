@@ -1,7 +1,8 @@
 import moment from 'moment';
+import React from 'react';
 import Component from 'common/component';
 
-export default class ProfileSettings extends Component {
+class ProfileSettings extends Component {
 	constructor() {
 		super();
 
@@ -13,6 +14,7 @@ export default class ProfileSettings extends Component {
 	render() {
 		return (
 			<div>
+				{this.context.param}
 				<p>Profile settings</p>
 				<button onClick={this.openDashboard.bind(this)}>Back home</button>
 				<h3 style={{color: 'white'}}>{this.state.time}</h3>
@@ -42,3 +44,9 @@ export default class ProfileSettings extends Component {
 		return moment().format('LTS');
 	}
 }
+
+ProfileSettings.contextTypes = {
+	param: React.PropTypes.string.isRequired
+};
+
+export default ProfileSettings;

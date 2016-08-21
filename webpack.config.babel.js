@@ -9,6 +9,11 @@ const dynamic = {
 	locale: 'ru'
 };
 
+const modulesDir = `${__dirname}/src/js/app`;
+const modules = fs.readdirSync(modulesDir).filter(function(file) {
+  return fs.statSync(path.join(modulesDir, file)).isDirectory();
+});
+
 module.exports = {
 	context: `${__dirname}/src`,
 	entry: {
@@ -80,9 +85,7 @@ module.exports = {
 
 	plugins: [
 		new webpack.DefinePlugin({
-			MODULES: JSON.stringify([
-				'account', 'settings', 'feed'
-			]),
+			MODULES: JSON.stringify(modules),
 			VERSION: JSON.stringify(dynamic.version),
 			LOCALE: JSON.stringify(dynamic.locale)
 		}),

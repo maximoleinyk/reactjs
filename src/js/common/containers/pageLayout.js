@@ -3,7 +3,7 @@ import 'css/containers/feed.scss';
 import Component from 'common/component';
 import Navigation from 'common/components/navigation';
 
-export default class PageLayout extends Component {
+class PageLayout extends Component {
 	render() {
 		return (
 			<div className="container-fluid">
@@ -21,3 +21,5 @@ export default class PageLayout extends Component {
 		);
 	}
 }
+
+export default PageLayout;

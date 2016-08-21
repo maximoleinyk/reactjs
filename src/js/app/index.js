@@ -52,9 +52,8 @@ class Application {
 		    </Route>
 		  </Router>
 		);
-		let $node = document.querySelector('#app');
 
-		render(router, $node);
+		render(router, document.querySelector('#app'));
 	}
 };
 
