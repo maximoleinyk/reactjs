@@ -1,8 +1,7 @@
 import {render} from 'react-dom';
-import {Router, Route, IndexRoute} from 'react-router';
+import {Router, Route, IndexRedirect} from 'react-router';
 import history 	from 'common/history';
-import Layout	 	from 'common/containers/layout';
-import Dashboard 	from 'common/containers/dashboard';
+import Layout	 	from 'common/containers/appLayout';
 import NotFound from 'common/containers/notFound';
 
 class Application {
@@ -28,23 +27,28 @@ class Application {
 			}
 
 			require(`bundle!app/${name}/routes`)((module) => {
-				callback(null, [module.default, notFoundRoute]);
+				callback(null, [module.default, {
+					path: '*',
+					onEnter: (state, replace, callback) => {
+						replace('/page/404');
+						callback();
+					}
+				}]);
 			});
 
 			return true;
 		});
 
-		!wasFound && callback(null, notFoundRoute);
+		!wasFound && callback(null, [notFoundRoute]);
 	}
 
 	start(modules) {
 		let router = (
 			<Router history={history}>
-				<Route path="/page"
-							 component={Layout}
+				<Route path="/page" component={Layout}
 							 getChildRoutes={this.getChildRoutes.bind(this)}
 							 onEnter={this.isAuthenticated.bind(this)}>
-		    	<IndexRoute component={Dashboard}/>
+		    	<IndexRedirect to="/page/feed" />
 		    </Route>
 		  </Router>
 		);

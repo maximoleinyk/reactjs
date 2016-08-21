@@ -10,16 +10,10 @@ const dynamic = {
 };
 
 module.exports = {
-	dynamic: dynamic,
-
 	context: `${__dirname}/src`,
-
 	entry: {
 		start: './js/start'
 	},
-
-	devtool: 'source-map',
-
 	output: {
 		path: `${__dirname}/dist/`,
 		publicPath: `/static/`,
@@ -81,10 +75,13 @@ module.exports = {
 		})];
 	},
 
+	dynamic: dynamic,
+	devtool: 'source-map',
+
 	plugins: [
 		new webpack.DefinePlugin({
 			MODULES: JSON.stringify([
-				'account', 'settings'
+				'account', 'settings', 'feed'
 			]),
 			VERSION: JSON.stringify(dynamic.version),
 			LOCALE: JSON.stringify(dynamic.locale)

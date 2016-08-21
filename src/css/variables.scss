@@ -1,3 +1,4 @@
+// Bootstrap
 $spacer: 1rem;
 $enable-flex: true;
 $enable-rounded: true;
@@ -7,3 +8,10 @@ $enable-transitions: true;
 $enable-hover-media-query: true;
 $enable-grid-classes: true;
 $font-size-root: 14px;
+
+// Application specific
+$bodyBackgroundColor: #EDEEF0;
+$navbarBackgroundColor: #373F51;
+$sectionBorderColor: #373F51;
+$blockBackgroundColor: #FEF2E7;
+$linkColor: #58A4B0;

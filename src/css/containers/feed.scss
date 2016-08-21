@@ -1,0 +1,30 @@
+@import "../variables";
+
+body {
+	background-color: $bodyBackgroundColor;
+}
+
+.form-group {
+	&:last-child {
+		margin-bottom: 0;
+	}
+}
+
+.app-navbar {
+	background-color: $navbarBackgroundColor;
+}
+
+.app-feed {
+	section {
+		background-color: #fff;
+		border: 1px solid #ccc;
+		padding: 1rem;
+	}
+	.row {
+		margin: 1rem 0 0;
+	}
+}
+
+.navbar-light .navbar-nav .nav-link {
+	color: #fff;
+}

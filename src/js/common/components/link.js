@@ -1,8 +1,8 @@
 import Component from 'common/component';
-import {IndexLink} from 'react-router';
+import {Link} from 'react-router';
 
-export default class AppLink extends Component {
+export default class NavLink extends Component {
 	render() {
-		return <IndexLink {...this.props} activeClassName='selected'/>;
+		return <Link {...this.props} className="nav-item nav-link" activeClassName="active">{this.props.children}</Link>;
 	}
 }
