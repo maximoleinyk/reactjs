@@ -1,6 +1,8 @@
+import {connect} from 'react-redux';
 import Component from 'common/component';
 import TextBox from 'common/components/textBox';
 import Form from 'common/components/form';
+import {create} from './actions';
 
 class FeedBox extends Component {
 	render() {
@@ -18,7 +20,8 @@ class FeedBox extends Component {
 			return;
 		}
 
-		console.log(value);
+		this.props.store.dispatch(create(value));
+		this.refs.textBox.clear();
 	}
 }
 

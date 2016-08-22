@@ -1,25 +1,38 @@
+import {connect} from 'react-redux';
 import Component from 'common/component';
+import FeedItem from './item';
+import {create} from './actions';
 
 class FeedList extends Component {
-	constructor() {
+	constructor(props) {
 		super();
 
 		this.state = {
-			items: []
+			items: props.store.getState()
 		};
 	}
-
+	componentDidMount() {
+		this.props.store.subscribe(() => {
+			this.setState({
+				items: this.props.store.getState()
+			});
+		});
+	}
 	render() {
-		let items = this.state.items.length ? this.state.items.map((item) => {
-			return <li>item</li>;
-		}) : <li>No items</li>;
+		if (this.state.items.length) {
+			return (
+				<div>
+					{
+						this.state.items.map((item) => {
+							return <FeedItem key={item.id} data={item} />;
+						})
+					}
+				</div>
+			);
+		}
 
 		return (
-			<div className="text-sm-center">
-				<ul className="list-unstyled">
-					{items}
-				</ul>
-   		</div>
+			<div className="col-xs-12 text-sm-center">No items</div>
 		);
 	}
 }

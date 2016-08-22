@@ -20,6 +20,10 @@ class TextBox extends Component {
 	getValue() {
 		return this.refs.input.value;
 	}
+
+	clear() {
+		this.refs.input.value = '';
+	}
 }
 
 export default TextBox;
