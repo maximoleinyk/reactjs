@@ -1,8 +1,13 @@
-import {Component} from 'react';
-import history from 'common/history';
+import {PropTypes, Component} from 'react';
 
-export default class AppCompoennt extends Component {
+class AppCompoennt extends Component {
 	navigateTo(path) {
-			history.push(path);
+		this.context.router.push(path);
 	}
 }
+
+AppCompoennt.contextTypes = {
+	router: PropTypes.object.isRequired
+};
+
+export default AppCompoennt;

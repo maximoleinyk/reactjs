@@ -1,7 +1,6 @@
 import {render} from 'react-dom';
-import {Router, Route, IndexRedirect} from 'react-router';
+import {Router, Route, IndexRedirect, browserHistory} from 'react-router';
 import RouteUtils from 'react-router/lib/RouteUtils';
-import history 	from 'common/history';
 import Layout	 	from 'common/containers/appLayout';
 import NotFound from 'common/containers/notFound';
 
@@ -35,7 +34,7 @@ class Application {
 
 	start(modules) {
 		let router = (
-			<Router history={history}>
+			<Router history={browserHistory}>
 				<Route path="/page" component={Layout}
 							 getChildRoutes={this.getChildRoutes.bind(this)}
 							 onEnter={this.isAuthenticated.bind(this)}>
