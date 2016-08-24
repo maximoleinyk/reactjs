@@ -1,3 +1,0 @@
-const ADD_FEED_ITEM = 'ADD_FEED_ITEM';
-
-export {ADD_FEED_ITEM};

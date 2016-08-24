@@ -4,26 +4,14 @@ import FeedItem from './item';
 import {create} from './actions';
 
 class FeedList extends Component {
-	constructor(props) {
-		super();
-
-		this.state = {
-			items: props.store.getState()
-		};
-	}
-	componentDidMount() {
-		this.props.store.subscribe(() => {
-			this.setState({
-				items: this.props.store.getState()
-			});
-		});
-	}
 	render() {
-		if (this.state.items.length) {
+		let items = this.props.items || [];
+
+		if (items.length) {
 			return (
 				<div>
 					{
-						this.state.items.map((item) => {
+						items.map((item) => {
 							return <FeedItem key={item.id} data={item} />;
 						})
 					}
@@ -37,4 +25,10 @@ class FeedList extends Component {
 	}
 }
 
-export default FeedList;
+let mapStateToProps = (state) => {
+	return {
+		items: state.feedItems
+	};
+};
+
+export default connect(mapStateToProps)(FeedList);

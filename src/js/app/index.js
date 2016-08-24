@@ -1,5 +1,6 @@
 import {render} from 'react-dom';
 import {Router, Route, IndexRedirect} from 'react-router';
+import RouteUtils from 'react-router/lib/RouteUtils';
 import history 	from 'common/history';
 import Layout	 	from 'common/containers/appLayout';
 import NotFound from 'common/containers/notFound';
@@ -16,24 +17,14 @@ class Application {
 	}
 
 	getChildRoutes(state, callback) {
-		const notFoundRoute = {
-			path: '*',
-			component: NotFound
-		};
-
+		const notFoundRoute = <Route path="*" component={NotFound}></Route>;
 		const wasFound = this.config.modules.some((name) => {
 			if (!location.pathname.startsWith('/page/' + name)) {
 				return;
 			}
 
 			require(`bundle!app/${name}/routes`)((module) => {
-				callback(null, [module.default, {
-					path: '*',
-					onEnter: (state, replace, callback) => {
-						replace('/page/404');
-						callback();
-					}
-				}]);
+				callback(null, [module.default, notFoundRoute]);
 			});
 
 			return true;

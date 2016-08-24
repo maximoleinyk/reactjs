@@ -1,10 +1,12 @@
+import {Route, IndexRoute} from 'react-router';
 import PageLayout from 'common/containers/pageLayout';
-import ProfileSettings from './containers/profile';
+import Dashboard from './containers/dashboard';
+import reducers from './reducers';
 
-export default {
-	path: 'settings',
-	component: PageLayout,
-	indexRoute:  {
-		component: ProfileSettings
-	}
-};
+const routes = (
+	<Route path="settings" component={PageLayout} reducers={reducers}>
+		<IndexRoute component={Dashboard} />
+	</Route>
+);
+
+export default routes;
