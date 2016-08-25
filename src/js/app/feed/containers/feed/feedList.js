@@ -11,6 +11,7 @@ class FeedList extends Component {
 			items: props.store.getState()
 		};
 	}
+
 	componentDidMount() {
 		this.props.store.subscribe(() => {
 			this.setState({
@@ -18,6 +19,7 @@ class FeedList extends Component {
 			});
 		});
 	}
+
 	render() {
 		if (this.state.items.length) {
 			return (

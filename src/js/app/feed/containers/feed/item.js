@@ -6,6 +6,11 @@ class Item extends Component {
 
 		this.state = props.data;
 	}
+
+	shouldComponentUpdate(nextProps, nextState) {
+		return nextProps.data.text !== this.props.data.text;
+	}
+
 	render() {
 		return (
 			<div>
