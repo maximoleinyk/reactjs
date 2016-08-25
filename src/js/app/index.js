@@ -1,3 +1,5 @@
+import 'bootstrap/dist/js/bootstrap';
+
 import {render} from 'react-dom';
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router';
 import RouteUtils from 'react-router/lib/RouteUtils';

@@ -1,1 +1,3 @@
 export const ADD_FEED_ITEM = 'ADD_FEED_ITEM';
+export const REMOVE_FEED_ITEM = 'REMOVE_FEED_ITEM';
+export const UPDATE_FEED_ITEM = 'UPDATE_FEED_ITEM';

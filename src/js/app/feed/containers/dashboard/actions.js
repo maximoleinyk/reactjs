@@ -1,4 +1,4 @@
-import {ADD_FEED_ITEM} from 'app/feed/constants';
+import {ADD_FEED_ITEM, REMOVE_FEED_ITEM, UPDATE_FEED_ITEM} from 'app/feed/constants';
 
 let create = (text) => {
 	return {
@@ -7,4 +7,18 @@ let create = (text) => {
 	};
 };
 
-export {create};
+let remove = (id) => {
+	return {
+		type: REMOVE_FEED_ITEM,
+		id
+	};
+};
+
+let update = (data) => {
+	return {
+		type: UPDATE_FEED_ITEM,
+		...data
+	};
+};
+
+export {create, remove, update};

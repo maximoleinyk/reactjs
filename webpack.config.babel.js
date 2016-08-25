@@ -91,7 +91,10 @@ module.exports = {
 		}),
 		new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, new RegExp(dynamic.locale)),
 		new webpack.ProvidePlugin({
-			React: 'react'
+			React: 'react',
+			jQuery: 'jquery',
+			$: 'jquery',
+			'window.Tether': 'tether'
 		}),
 		// new ExtractTextPlugin('css/styles.css', {
 		// 	allChunks: true

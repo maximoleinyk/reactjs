@@ -1,0 +1,13 @@
+.ellipsis {
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+.flex {
+	display: flex;
+
+	.flex-grow-1 {
+		flex-grow: 1;
+	}
+}
