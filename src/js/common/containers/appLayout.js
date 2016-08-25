@@ -5,7 +5,6 @@ import Component from 'common/component';
 class AppLayout extends Component {
 	getChildContext() {
 		return {
-			param: 'something'
 		};
 	}
 	render() {
@@ -16,7 +15,6 @@ class AppLayout extends Component {
 }
 
 AppLayout.childContextTypes = {
-	param: React.PropTypes.string
 }
 
 export default AppLayout;

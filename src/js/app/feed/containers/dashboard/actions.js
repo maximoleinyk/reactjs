@@ -1,4 +1,4 @@
-import {ADD_FEED_ITEM} from './constants';
+import {ADD_FEED_ITEM} from 'app/feed/constants';
 
 let create = (text) => {
 	return {

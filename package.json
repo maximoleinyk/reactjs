@@ -82,7 +82,6 @@
   "dependencies": {
     "bootstrap": "^4.0.0-alpha.3",
     "font-awesome": "^4.6.3",
-    "history": "^2.1.2",
     "moment": "^2.14.1",
     "react": "^15.3.0",
     "react-dom": "^15.3.0",

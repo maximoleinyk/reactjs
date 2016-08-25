@@ -1,14 +1,15 @@
 import {connect} from 'react-redux';
 import Component from 'common/component';
-import TextBox from 'common/components/textBox';
-import Form from 'common/components/form';
+import {Form, Fieldset, TextBox} from 'common/components';
 import {create} from './actions';
 
 class FeedBox extends Component {
 	render() {
 		return (
-			<Form ref='form' onSubmit={this.create.bind(this)}>
-	 			<TextBox ref='textBox' field="message" placeholder="What's up?"/>
+			<Form onSubmit={this.create.bind(this)}>
+				<Fieldset legend={'new feed item'} srOnly={true}>
+		 			<TextBox ref='textBox' field="message" placeholder="What's up?"/>
+				</Fieldset>
 	 		</Form>
 		);
 	}
@@ -20,9 +21,9 @@ class FeedBox extends Component {
 			return;
 		}
 
-		this.props.store.dispatch(create(value));
+		this.props.dispatch(create(value));
 		this.refs.textBox.clear();
 	}
 }
 
-export default FeedBox;
+export default connect()(FeedBox);
