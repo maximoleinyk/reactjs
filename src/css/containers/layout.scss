@@ -1,0 +1,9 @@
+body {
+	background-color: $bodyBackgroundColor;
+}
+
+.form-group {
+	&:last-child {
+		margin-bottom: 0;
+	}
+}

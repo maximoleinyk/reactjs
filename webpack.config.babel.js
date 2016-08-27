@@ -76,7 +76,8 @@ let config = {
 			$: 'jquery',
 			'window.Tether': 'tether'
 		}),
-		new webpack.optimize.OccurenceOrderPlugin()
+		new webpack.optimize.OccurenceOrderPlugin(),
+		new webpack.optimize.DedupePlugin()
 	]
 };
 
@@ -139,30 +140,27 @@ if (process.env.NODE_ENV === 'production') {
 			host: 'localhost',
 			port: '8080',
 			proxy: {
-				'/page*': 'http://localhost:3000'
+				'/page': 'http://localhost:3000'
 			}
 		},
 
 		plugins: [
 			...config.plugins,
+
 			new webpack.DefinePlugin({
 				MODULES: JSON.stringify(getModules()),
 				VERSION: JSON.stringify('DEVELOPMENT-0.0.1'),
-				LOCALE: JSON.stringify('ru'),
-				'process.env': {
-					'NODE_ENV': JSON.stringify('development')
-				}
-			}),
-			new webpack.optimize.DedupePlugin(),
-			new webpack.NoErrorsPlugin()
+				LOCALE: JSON.stringify('ru')
+			})
 		],
 
 		module: {
 			...config.module,
+
 			loaders: [
 				{
 					test: /\.(jsx|js)$/,
-					loaders: ['babel'],
+					loaders: ['react-hot', 'babel'],
 					exclude: /node_modules/
 				},
 				{

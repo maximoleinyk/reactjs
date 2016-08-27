@@ -4,7 +4,7 @@ import Component from 'common/component';
 class TextBox extends Component {
 	render() {
 		let {field, label, srOnly, ...rest} = this.props;
-		let className = srOnly ? '' : 'sr-only';
+		let className = srOnly ? 'sr-only' : '';
 
 		return (
 			<div className="form-group">

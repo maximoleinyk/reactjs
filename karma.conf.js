@@ -6,7 +6,7 @@ var autoprefixer = require('autoprefixer');
 
 module.exports = function(config) {
 	config.set({
-		singleRun: true,
+		singleRun: false,
 
 		browsers: ['PhantomJS'],
 
@@ -47,7 +47,8 @@ module.exports = function(config) {
 				loaders: [
 					{
 						test: /\.js$/,
-						loader: 'babel',
+						// do not include istanbul plugin to global babel config it will break the build
+						loader: 'babel?plugins[]=istanbul',
 						exclude: /node_modules/
 					},
 					{
