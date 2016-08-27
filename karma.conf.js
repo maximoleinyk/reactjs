@@ -1,10 +1,12 @@
+/*global require module __dirname */
+
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
 
 module.exports = function(config) {
 	config.set({
-		singleRun: false,
+		singleRun: true,
 
 		browsers: ['PhantomJS'],
 
@@ -24,6 +26,14 @@ module.exports = function(config) {
 			'test/index.js'
 		],
 
+    port: 9876,
+
+    colors: true,
+
+    logLevel: config.LOG_INFO,
+
+    autoWatch: true,
+
 		preprocessors: {
 			'test/index.js': ['webpack', 'sourcemap']
 		},
@@ -32,6 +42,7 @@ module.exports = function(config) {
 
 		webpack: {
 			devtool: 'inline-source-map',
+
 			module: {
 				loaders: [
 					{
@@ -50,6 +61,7 @@ module.exports = function(config) {
 					}
 				]
 			},
+
 			resolve: {
 				alias: {
 					css: path.resolve(__dirname, 'src/css'),

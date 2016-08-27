@@ -1,7 +1,7 @@
+import {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Component from 'common/component';
 import FeedItem from './item';
-import {create} from './actions';
 
 class FeedList extends Component {
 	render() {
@@ -29,6 +29,10 @@ let mapStateToProps = (state) => {
 	return {
 		items: state.feedItems
 	};
+};
+
+FeedList.propTypes = {
+	items: PropTypes.array.isRequired
 };
 
 export default connect(mapStateToProps)(FeedList);

@@ -1,3 +1,4 @@
+/* global window */
 import { PropTypes } from 'react';
 import {createStore, combineReducers} from 'redux';
 import Component from 'common/component';
@@ -22,26 +23,31 @@ class PageLayout extends Component {
 	render() {
 		return (
 			<div className="container-fluid">
-	   		<div className="row app-navbar">
+				<div className="row app-navbar">
 					<div className="col-12">
-     				<Navigation />
+						<Navigation />
 					</div>
-     		</div>
+				</div>
 				<div className="row">
 					<div className="col-12">
-   					{this.props.children}
+						{this.props.children}
 					</div>
-   			</div>
+				</div>
 			</div>
 		);
 	}
 }
 
+PageLayout.propTypes = {
+	route: PropTypes.object.isRequired,
+	children: PropTypes.element.isRequired
+};
+
 PageLayout.childContextTypes = {
   store: PropTypes.shape({
-	  subscribe: PropTypes.func.isRequired,
-	  dispatch: PropTypes.func.isRequired,
-	  getState: PropTypes.func.isRequired
+		subscribe: PropTypes.func.isRequired,
+		dispatch: PropTypes.func.isRequired,
+		getState: PropTypes.func.isRequired
 	}).isRequired
 };
 

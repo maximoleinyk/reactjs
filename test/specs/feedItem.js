@@ -1,3 +1,5 @@
+/* global describe it assert */
+
 import {ADD_FEED_ITEM, UPDATE_FEED_ITEM} from 'app/feed/constants';
 import feedItem from 'app/feed/reducers/feedItem';
 

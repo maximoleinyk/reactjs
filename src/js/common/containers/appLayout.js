@@ -1,18 +1,18 @@
+import {PropTypes} from 'react';
 import Component from 'common/component';
 
 class AppLayout extends Component {
-	getChildContext() {
-		return {
-		};
-	}
 	render() {
 		return (
-			<main className='app'>{this.props.children}</main>
+			<main className='app'>
+				{this.props.children}
+			</main>
 		);
 	}
 }
 
-AppLayout.childContextTypes = {
+AppLayout.propTypes = {
+	children: PropTypes.element.isRequired
 }
 
 export default AppLayout;

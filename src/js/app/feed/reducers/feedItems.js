@@ -13,11 +13,9 @@ let feedItems = (state = [], payload) => {
 				return item.id !== payload.id;
 			});
 		case UPDATE_FEED_ITEM:
-			let newArray = state.map((item) => {
+			return state.map((item) => {
 				return item.id === payload.id ? feedItem(item, payload) : item;
 			});
-
-			return newArray;
 		default:
 			return state;
 	}

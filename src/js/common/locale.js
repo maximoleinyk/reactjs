@@ -3,13 +3,13 @@ class Locale {
 		this.pairs = {};
 	}
 
-	register(pairs) {
+	register() {
 		// implement
 	}
 
-	get(name, ...parts) {
+	get() {
 		// implement
 	}
-};
+}
 
 export default Locale;

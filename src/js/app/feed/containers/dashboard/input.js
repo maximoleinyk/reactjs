@@ -7,9 +7,9 @@ class FeedBox extends Component {
 		return (
 			<Form onSubmit={this.props.handler}>
 				<Fieldset legend={'new feed item'} srOnly={true}>
-		 			<TextBox ref='textBox' field="message" placeholder="What's up?"/>
+					<TextBox ref='textBox' srOnly={true} label='message' field="message" placeholder="What's up?"/>
 				</Fieldset>
-	 		</Form>
+			</Form>
 		);
 	}
 

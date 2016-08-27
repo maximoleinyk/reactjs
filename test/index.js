@@ -1,3 +1,5 @@
+/* global require */
+
 // context for all js files in 'src' directory
 var srcContext = require.context('../src', true, /\.js$/);
 

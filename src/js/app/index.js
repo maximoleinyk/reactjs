@@ -1,9 +1,9 @@
+/* global location require module document $*/
 import 'css/main';
 import 'bootstrap/dist/js/bootstrap';
 
 import {render} from 'react-dom';
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router';
-import RouteUtils from 'react-router/lib/RouteUtils';
 import Layout	 	from 'common/containers/appLayout';
 import NotFound from 'common/containers/notFound';
 
@@ -35,29 +35,22 @@ class Application {
 		!wasFound && callback(null, [notFoundRoute]);
 	}
 
-	start(modules) {
+	start() {
 		let router = (
 			<Router history={browserHistory}>
 				<Route path="/page" component={Layout}
-							 getChildRoutes={this.getChildRoutes.bind(this)}
-							 onEnter={this.isAuthenticated.bind(this)}>
-		    	<IndexRedirect to="/page/feed" />
-		    </Route>
-		  </Router>
+							getChildRoutes={this.getChildRoutes.bind(this)}
+							onEnter={this.isAuthenticated.bind(this)}>
+					<IndexRedirect to="/page/feed" />
+				</Route>
+			</Router>
 		);
 
 		$(document).ready(function () {
-			var $node = document.querySelector('#app');
-
-			if (!$node) {
-				$node = document.createElement('div');
-				document.body.appendChild($node);
-			}
-			
-			render(router, $node);
+			render(router, document.querySelector('#app') || document.body);
 		});
 	}
-};
+}
 
 // to avoid doing new app.defaults(); in start.js
 module.exports = Application;

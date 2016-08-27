@@ -1,3 +1,4 @@
+/* global MODULES VERSION LOCALE module require */
 import {browser} from 'common/browser';
 
 const config = {

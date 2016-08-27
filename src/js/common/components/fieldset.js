@@ -1,4 +1,6 @@
-export default (props) => {
+import {PropTypes} from 'react';
+
+const FieldSet = (props) => {
 	let {srOnly, legend, children, ...rest} = props;
 
 	return (
@@ -8,3 +10,11 @@ export default (props) => {
 		</fieldset>
 	)
 };
+
+FieldSet.propTypes = {
+	srOnly: PropTypes.bool,
+	legend: PropTypes.string.isRequired,
+	children: PropTypes.element.isRequired
+};
+
+export default FieldSet;

@@ -1,20 +1,19 @@
+/* global __dirname module process */
 import path from 'path';
 import fs from 'fs';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 
-const dynamic = {
-	version: 'DEVELOPMENT',
-	locale: 'ru'
+let getModules = () => {
+	const modulesDir = `${__dirname}/src/js/app`;
+
+	return fs.readdirSync(modulesDir).filter(function(file) {
+		return fs.statSync(path.join(modulesDir, file)).isDirectory();
+	});
 };
 
-const modulesDir = `${__dirname}/src/js/app`;
-const modules = fs.readdirSync(modulesDir).filter(function(file) {
-  return fs.statSync(path.join(modulesDir, file)).isDirectory();
-});
-
-module.exports = {
+let config = {
 	context: `${__dirname}/src`,
 
 	entry: {
@@ -45,32 +44,6 @@ module.exports = {
 		extensions: ['', '.js', '.scss', '.css']
 	},
 
-	module: {
-		loaders: [
-			// js
-			{
-				test: /\.(jsx|js)$/,
-				loaders: ['react-hot', 'babel'],
-				include: `${__dirname}/src/js`
-			},
-			// scss
-			{
-				test: /\.scss$/,
-				loader: 'style!css!postcss!sass?sourceMap',
-				include: `${__dirname}/src/css`
-			},
-			// {
-			// 	test: /\.scss$/,
-			// 	loader: ExtractTextPlugin.extract("css!postcss!sass?data=$fa-font-path: \"~font-awesome/fonts\";", {disabled: true})
-			// },
-			// fonts
-			{
-				test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
-				loader: `file?name=fonts/[name].[ext]`
-			}
-		]
-	},
-
 	sassLoader: {
 		data: '$fa-font-path: "~font-awesome/fonts";'
 	},
@@ -81,37 +54,129 @@ module.exports = {
 		})];
 	},
 
-	dynamic: dynamic,
+	eslint: {
+		configFile: '.eslintrc'
+	},
 
-	devtool: 'source-map',
+	module: {
+		preLoaders: [
+			{
+				test: /\.(js|jsx)$/,
+				loaders: ['babel', 'eslint'],
+				exclude: /node_modules/
+			}
+		]
+	},
 
 	plugins: [
-		new webpack.DefinePlugin({
-			MODULES: JSON.stringify(modules),
-			VERSION: JSON.stringify(dynamic.version),
-			LOCALE: JSON.stringify(dynamic.locale)
-		}),
-		new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, new RegExp(dynamic.locale)),
+		new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, new RegExp('ru')),
 		new webpack.ProvidePlugin({
 			React: 'react',
 			jQuery: 'jquery',
 			$: 'jquery',
 			'window.Tether': 'tether'
 		}),
-		// new ExtractTextPlugin('css/styles.css', {
-		// 	allChunks: true
-		// }),
-		new webpack.NoErrorsPlugin(),
-		new webpack.optimize.DedupePlugin(),
 		new webpack.optimize.OccurenceOrderPlugin()
-	],
-
-	devServer: {
-		host: 'localhost',
-		port: '8080',
-		proxy: {
-			'/page*': 'http://localhost:3000'
-		},
-		hot: true
-	}
+	]
 };
+
+if (process.env.NODE_ENV === 'production') {
+	config = {
+		...config,
+
+		plugins: [
+			...config.plugins,
+			new webpack.DefinePlugin({
+				MODULES: JSON.stringify(getModules()),
+				VERSION: JSON.stringify('PRODUCTION'),
+				LOCALE: JSON.stringify('ru'),
+				'process.env': {
+					'NODE_ENV': JSON.stringify('production')
+				}
+			}),
+			new ExtractTextPlugin('css/styles.css', {
+				allChunks: true
+			}),
+			new webpack.optimize.UglifyJsPlugin({
+				compressor: {
+					warnings: false
+				}
+			})
+		],
+
+		module: {
+			...config.module,
+			loaders: [
+				{
+					test: /\.(jsx|js)$/,
+					loaders: ['babel'],
+					include: `${__dirname}/src/js`
+				},
+				{
+					test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
+					loader: `file?name=fonts/[name].[ext]`
+				},
+				{
+					test: /\.scss$/,
+					loader: ExtractTextPlugin.extract('css!postcss!sass')
+				}
+			]
+		},
+
+		eslint: {
+			...config.eslint,
+
+			failOnError: true
+		}
+	};
+} else {
+	config = {
+		...config,
+
+		devtool: 'source-map',
+
+		devServer: {
+			host: 'localhost',
+			port: '8080',
+			proxy: {
+				'/page*': 'http://localhost:3000'
+			}
+		},
+
+		plugins: [
+			...config.plugins,
+			new webpack.DefinePlugin({
+				MODULES: JSON.stringify(getModules()),
+				VERSION: JSON.stringify('DEVELOPMENT-0.0.1'),
+				LOCALE: JSON.stringify('ru'),
+				'process.env': {
+					'NODE_ENV': JSON.stringify('development')
+				}
+			}),
+			new webpack.optimize.DedupePlugin(),
+			new webpack.NoErrorsPlugin()
+		],
+
+		module: {
+			...config.module,
+			loaders: [
+				{
+					test: /\.(jsx|js)$/,
+					loaders: ['babel'],
+					exclude: /node_modules/
+				},
+				{
+					test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
+					loader: `file?name=fonts/[name].[ext]`
+				},
+				{
+					test: /\.scss$/,
+					loader: 'style!css!postcss!sass?sourceMap',
+					include: `${__dirname}/src/css`
+				}
+			]
+		}
+	};
+}
+
+module.exports = config;

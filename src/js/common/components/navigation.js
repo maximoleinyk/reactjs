@@ -24,18 +24,18 @@ class Navigation extends Component {
 
 		return (
 			<div className="container">
-		   	<div className="row">
-		    	<div className="col-xs-12">
+				<div className="row">
+					<div className="col-xs-12">
 						<nav className="navbar navbar-dark">
-						  <div className="nav navbar-nav">
-						    <Link to="/page/feed" className="nav-link nav-item">
+							<div className="nav navbar-nav">
+								<Link to="/page/feed" className="nav-link nav-item">
 									<span>Feed</span> {counterBadge}
 								</Link>
-						  </div>
+							</div>
 						</nav>
 					</div>
-		    </div>
-		   </div>
+				</div>
+			</div>
 		);
 	}
 }

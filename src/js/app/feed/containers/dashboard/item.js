@@ -1,3 +1,4 @@
+import {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Component from 'common/component';
 import Input from './input';
@@ -60,5 +61,10 @@ class Item extends Component {
 		return this.state.readMode ? text : input;
 	}
 }
+
+Item.propTypes = {
+	item: PropTypes.object.isRequired,
+	dispatch: PropTypes.func.isRequired
+};
 
 export default connect()(Item);

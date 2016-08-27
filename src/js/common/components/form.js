@@ -1,12 +1,10 @@
-import React from 'react';
+import {PropTypes} from 'react';
 import Component from 'common/component';
 
 class Form extends Component {
 	render() {
-		let {onSubmit, ...rest} = this.props;
-
 		return (
-			<form autoComplete="off" onSubmit={this.submit.bind(this)} {...rest}>
+			<form autoComplete="off" {...this.props} onSubmit={this.submit.bind(this)}>
 				{this.props.children}
 			</form>
 		);
@@ -19,7 +17,8 @@ class Form extends Component {
 }
 
 Form.propTypes = {
-	onSubmit: React.PropTypes.func.isRequired
+	children: PropTypes.element.isRequired,
+	onSubmit: PropTypes.func.isRequired
 };
 
 export default Form;

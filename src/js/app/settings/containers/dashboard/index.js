@@ -1,3 +1,5 @@
+/* global window */
+
 import moment from 'moment';
 import Component from 'common/component';
 
@@ -21,7 +23,7 @@ class ProfileSettings extends Component {
 	}
 
 	componentDidMount() {
-		this.timer = setInterval(() => {
+		this.timer = window.setInterval(() => {
 			this.setState({
 				time: this.getTime()
 			})
@@ -29,7 +31,7 @@ class ProfileSettings extends Component {
 	}
 
 	componentWillUnmount() {
-		clearInterval(this.timer);
+		window.clearInterval(this.timer);
 	}
 
 	openDashboard() {

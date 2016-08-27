@@ -1,3 +1,5 @@
+/* global describe it assert */
+
 import {browser} from 'common/browser';
 
 describe('Browser API', () => {
