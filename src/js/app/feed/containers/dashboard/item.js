@@ -1,6 +1,6 @@
 import {connect} from 'react-redux';
 import Component from 'common/component';
-import {Form, Fieldset, TextBox} from 'common/components';
+import Input from './input';
 import {remove, update} from './actions';
 
 class Item extends Component {
@@ -22,8 +22,8 @@ class Item extends Component {
 		});
 	}
 
-	updateItem() {
-		const value = this.refs.textBox.getValue().trim();
+	update() {
+		const value = this.refs.input.getValue();
 
 		if (!value.length) {
 			return;
@@ -38,19 +38,11 @@ class Item extends Component {
 		});
 	}
 
-	change() {
-		console.log('changed');
-	}
-
 	render() {
 		let input = (
 			<div className="flex">
-				<div className="flex-grow-1 ellipsis" onDoubleClick={this.showInput.bind(this)}>
-					<Form onSubmit={this.updateItem.bind(this)}>
-						<Fieldset legend={'update'} srOnly={true}>
-							<TextBox ref='textBox' field="message" placeholder="What's up?" defaultValue={this.props.item.text}/>
-						</Fieldset>
-					</Form>
+				<div className="flex-grow-1 ellipsis">
+					<Input ref='input' handler={this.update.bind(this)}/>
 				</div>
 			</div>
 		);

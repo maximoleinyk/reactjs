@@ -1,12 +1,11 @@
-import {connect} from 'react-redux';
+import {PropTypes} from 'react';
 import Component from 'common/component';
 import {Form, Fieldset, TextBox} from 'common/components';
-import {create} from './actions';
 
 class FeedBox extends Component {
 	render() {
 		return (
-			<Form onSubmit={this.create.bind(this)}>
+			<Form onSubmit={this.props.handler}>
 				<Fieldset legend={'new feed item'} srOnly={true}>
 		 			<TextBox ref='textBox' field="message" placeholder="What's up?"/>
 				</Fieldset>
@@ -14,16 +13,17 @@ class FeedBox extends Component {
 		);
 	}
 
-	create() {
-		const value = this.refs.textBox.getValue().trim();
+	getValue() {
+		return this.refs.textBox.getValue().trim();
+	}
 
-		if (!value.length) {
-			return;
-		}
-
-		this.props.dispatch(create(value));
-		this.refs.textBox.clear();
+	clear() {
+		return this.refs.textBox.clear();
 	}
 }
 
-export default connect()(FeedBox);
+FeedBox.propTypes = {
+	handler: PropTypes.func.isRequired
+};
+
+export default FeedBox;

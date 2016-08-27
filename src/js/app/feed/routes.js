@@ -1,3 +1,5 @@
+import 'css/containers/feed';
+
 import {Route, IndexRoute} from 'react-router';
 import PageLayout from 'common/containers/pageLayout';
 import Dashboard from './containers/dashboard';

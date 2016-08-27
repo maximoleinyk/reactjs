@@ -3,13 +3,15 @@
     "es2015",
     "react"
   ],
-	"env": {
-    "development": {
-      "presets": ["react-hmre"]
-    }
-  },
 	"plugins": [
 		"transform-object-rest-spread"
 	],
+	"env": {
+    "development": {
+			"plugins": [
+				"istanbul"
+			],
+    }
+  },
   "compact": true
 }

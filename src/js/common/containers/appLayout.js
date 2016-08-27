@@ -1,5 +1,3 @@
-import 'css/main';
-
 import Component from 'common/component';
 
 class AppLayout extends Component {

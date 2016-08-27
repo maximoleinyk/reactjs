@@ -1,5 +1,3 @@
-import 'css/containers/feed.scss';
-
 import { PropTypes } from 'react';
 import {createStore, combineReducers} from 'redux';
 import Component from 'common/component';

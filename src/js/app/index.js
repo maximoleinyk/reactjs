@@ -1,3 +1,4 @@
+import 'css/main';
 import 'bootstrap/dist/js/bootstrap';
 
 import {render} from 'react-dom';
@@ -45,7 +46,16 @@ class Application {
 		  </Router>
 		);
 
-		render(router, document.querySelector('#app'));
+		$(document).ready(function () {
+			var $node = document.querySelector('#app');
+
+			if (!$node) {
+				$node = document.createElement('div');
+				document.body.appendChild($node);
+			}
+			
+			render(router, $node);
+		});
 	}
 };
 

@@ -16,9 +16,11 @@ const modules = fs.readdirSync(modulesDir).filter(function(file) {
 
 module.exports = {
 	context: `${__dirname}/src`,
+
 	entry: {
 		start: './js/start'
 	},
+
 	output: {
 		path: `${__dirname}/dist/`,
 		publicPath: `/static/`,
@@ -34,7 +36,7 @@ module.exports = {
 			common: `${__dirname}/src/js/common`
 		},
 		modulesDirectories: ['node_modules', 'src/js'],
-		extensions: ['', '.js', '.jsx', '.scss']
+		extensions: ['', '.js', '.jsx', '.scss', '.css']
 	},
 
 	resolveLoader: {
@@ -64,8 +66,7 @@ module.exports = {
 			// fonts
 			{
 				test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
-				loader: `file?name=fonts/[name].[ext]`,
-				include: `${__dirname}/node_modules/font-awesome/fonts`
+				loader: `file?name=fonts/[name].[ext]`
 			}
 		]
 	},
@@ -81,6 +82,7 @@ module.exports = {
 	},
 
 	dynamic: dynamic,
+
 	devtool: 'source-map',
 
 	plugins: [

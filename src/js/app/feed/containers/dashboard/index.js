@@ -1,6 +1,8 @@
+import {connect} from 'react-redux';
 import Component from 'common/component';
 import Input from './input';
 import List from './list';
+import {create} from './actions';
 
 class Feed extends Component {
 	render() {
@@ -8,7 +10,7 @@ class Feed extends Component {
 			<div className="container app-feed">
 		   	<div className="row">
 		    	<section className="col-xs-12">
-						<Input />
+						<Input ref='input' handler={this.create.bind(this)}/>
 					</section>
 		    </div>
 				<div className="row">
@@ -19,6 +21,17 @@ class Feed extends Component {
 		  </div>
 		);
 	}
+
+	create() {
+		const value = this.refs.input.getValue();
+
+		if (!value.length) {
+			return;
+		}
+
+		this.props.dispatch(create(value));
+		this.refs.input.clear();
+	}
 }
 
-export default Feed;
+export default connect()(Feed);

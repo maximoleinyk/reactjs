@@ -6,6 +6,7 @@ node_modules
 temp
 npm-debug.log
 .DS_Store
+coverage
 
 src/js/vendor
 src/css/all.css.map
