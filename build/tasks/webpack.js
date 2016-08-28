@@ -1,12 +1,10 @@
-import fs from 'fs';
+/* global require */
 import gulp from 'gulp';
 import gutil from 'gulp-util';
 import webpack from 'webpack';
 
 export default (config) => {
 	const webpackConfig = require(config.files.webpackConfig);
-
-	webpackConfig.dynamic.version = config.version;
 
 	gulp.task('transpile', (callback) => {
 		webpack(webpackConfig, (err, stats) => {

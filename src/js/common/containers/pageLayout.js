@@ -5,8 +5,8 @@ import Component from 'common/component';
 import Navigation from 'common/components/navigation';
 
 class PageLayout extends Component {
-	constructor(props) {
-		super();
+	constructor(props, context) {
+		super(props, context);
 
 		let reducers = combineReducers(props.route.reducers);
 		let devTools = window.devToolsExtension && window.devToolsExtension();

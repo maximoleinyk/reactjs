@@ -4,6 +4,7 @@ import fs from 'fs';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import FlowStatusWebpackPlugin from 'flow-status-webpack-plugin';
 
 let getModules = () => {
 	const modulesDir = `${__dirname}/src/js/app`;
@@ -77,7 +78,10 @@ let config = {
 			'window.Tether': 'tether'
 		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.optimize.DedupePlugin()
+		new webpack.optimize.DedupePlugin(),
+		new FlowStatusWebpackPlugin({
+			failOnError: true
+		})
 	]
 };
 

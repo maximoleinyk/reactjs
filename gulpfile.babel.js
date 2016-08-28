@@ -19,6 +19,6 @@ tasks.register({
 		manifest: './dist/js/manifest.json',
 		distIndexHtml: './dist/index.html',
     startJs: './src/js/start.js',
-		webpackConfig: __dirname + '/webpack.config.babel.js'
+		webpackConfig: './webpack.config.babel.js'
   }
 });

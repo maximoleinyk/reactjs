@@ -1,7 +1,8 @@
+// @flow
 const browser = {
-	isCompatible: () => {
+	isCompatible(): boolean {
 		return true;
 	}
 };
 
-export {browser};
+export default browser;

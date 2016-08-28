@@ -1,5 +1,6 @@
+// @flow
 export default {
-	trim: (text) => {
+	trim: (text: string): string => {
 		return text.trim();
 	}
 };

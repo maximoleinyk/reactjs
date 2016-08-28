@@ -1,7 +1,8 @@
+// @flow
 import {PropTypes, Component} from 'react';
 
 class AppCompoennt extends Component {
-	navigateTo(path) {
+	navigateTo(path: string) {
 		this.context.router.push(path);
 	}
 }

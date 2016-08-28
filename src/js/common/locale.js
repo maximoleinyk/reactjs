@@ -1,4 +1,7 @@
+// @flow
 class Locale {
+	pairs: {}
+
 	constructor() {
 		this.pairs = {};
 	}

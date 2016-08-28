@@ -1,9 +1,24 @@
 [include]
+src/js/
 
 [ignore]
-.*/build
-.*/dist
-.*/node_modules
-.*/gulpfile.babel.js
+<PROJECT_ROOT>/test/.*
+<PROJECT_ROOT>/node_modules/.*
+<PROJECT_ROOT>/build/.*
+<PROJECT_ROOT>/coverage/.*
+<PROJECT_ROOT>/dist/.*
+<PROJECT_ROOT>\.babelrc
+<PROJECT_ROOT>\.editorconfig
+<PROJECT_ROOT>\.eslintignore
+<PROJECT_ROOT>\.eslintrc
+<PROJECT_ROOT>\.gitattributes
+<PROJECT_ROOT>\.gitignore
+<PROJECT_ROOT>package\.json
+
+[libs]
+src/js/interfaces/
 
 [options]
+module.name_mapper='^css\/\(.*\)' -> '<PROJECT_ROOT>/src/css/\1'
+module.name_mapper='^app\/\(.*\)' -> '<PROJECT_ROOT>/src/js/app/\1'
+module.name_mapper='^common\/\(.*\)' -> '<PROJECT_ROOT>/src/js/common/\1'
