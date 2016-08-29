@@ -1,13 +1,14 @@
 import {Route, IndexRoute} from 'react-router';
 import PageLayout from 'common/containers/pageLayout';
 import Dashboard from './containers/dashboard';
-import reducers from './reducers';
-import createStore from 'common/createStore';
+import {replaceReducer} from 'common/createStore';
+import reducer from './reducers';
 
-const store = createStore(reducers);
+/* eslint react/display-name: 0 */
+export default (store) => {
+  replaceReducer(store, reducer);
 
-export default (
-  <Route path="settings" component={PageLayout} store={store}>
+  return <Route path="settings" component={PageLayout} store={store}>
     <IndexRoute component={Dashboard} />
   </Route>
-);
+}

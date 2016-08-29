@@ -1,11 +1,10 @@
 import * as Constants from 'app/feed/constants';
-import feedItem from './feedItem';
 
 let feedItems = (state = [], payload) => {
 	switch (payload.type) {
 		case Constants.ADD_FEED_ITEM:
 			return [
-				feedItem(undefined, payload),
+        {...payload},
 				...state
 			];
 		case Constants.REMOVE_FEED_ITEM:
@@ -14,7 +13,7 @@ let feedItems = (state = [], payload) => {
 			});
 		case Constants.UPDATE_FEED_ITEM:
 			return state.map((item) => {
-				return item.id === payload.id ? feedItem(item, payload) : item;
+				return item.id === payload.id ? {...payload} : item;
 			});
 		default:
 			return state;

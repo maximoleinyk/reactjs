@@ -1,5 +1,10 @@
-import feedItems from 'app/feed/reducers/feedItems';
+import settings from './settings';
 
-export default {
-	feedItems
-};
+let settingsReducer = (reducers) => {
+  return {
+    settings,
+    ...reducers
+  };
+}
+
+export default settingsReducer;

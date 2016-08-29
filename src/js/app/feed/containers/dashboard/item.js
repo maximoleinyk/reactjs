@@ -44,7 +44,7 @@ class Item extends Component {
              onDoubleClick={() => this.setState({ readMode: false })}>
 					{this.props.item.text}
 				</div>
-        <a href="#" onClick={this.props.remove}>
+        <a href="#" onClick={this.props.remove.bind(this)}>
           <span className="fa fa-close"></span>
         </a>
 			</div>

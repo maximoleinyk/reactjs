@@ -1,8 +1,11 @@
 import * as Constants from 'app/feed/constants';
 
+let counter = 0;
+
 let create = (text) => {
 	return {
 		type: Constants.ADD_FEED_ITEM,
+    id: counter++,
 		text
 	};
 };

@@ -20,6 +20,6 @@ FeedNavLink.propTypes = {
 
 export default connect((state) => {
   return {
-    counter: state.feedItems.length
+    counter: state.feedItems && state.feedItems.length || 0
   };
 })(FeedNavLink);

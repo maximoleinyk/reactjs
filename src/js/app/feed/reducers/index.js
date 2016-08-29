@@ -1,7 +1,10 @@
-import feedItem from './feedItem';
 import feedItems from './feedItems';
 
-export default {
-	feedItems,
-	feedItem
-};
+let feedReducer = (reducers) => {
+  return {
+    feedItems,
+    ...reducers
+  };
+}
+
+export default feedReducer;

@@ -6,12 +6,14 @@ import {render} from 'react-dom';
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router';
 import Layout	 	from 'common/containers/appLayout';
 import NotFound from 'common/containers/notFound';
+import createStore from 'common/createStore';
 
 class Application {
 	constructor(config) {
 		this.config = config || {
 			modules: []
 		};
+    this.store = createStore();
 	}
 
 	isAuthenticated(nextState, replace, callback) {
@@ -26,7 +28,7 @@ class Application {
 			}
 
 			require(`bundle!app/${name}/routes`)((module) => {
-				callback(null, [module.default, notFoundRoute]);
+				callback(null, [module.default(this.store), notFoundRoute]);
 			});
 
 			return true;
