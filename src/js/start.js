@@ -9,8 +9,8 @@ const config = {
 };
 
 if (browser.isCompatible()) {
-  require.ensure([], (require) => {
-    const Application = require('app');
+  // flow-ignore
+  require(['app'], (Application) => {
     const app = new Application(config);
     app.start();
   });

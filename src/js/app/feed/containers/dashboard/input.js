@@ -4,11 +4,14 @@ import {Form, Fieldset, TextBox} from 'common/components';
 
 class FeedBox extends Component {
 	render() {
+    let {defaultValue} = this.props;
+
 		return (
 			<Form onSubmit={this.props.handler}>
 				<Fieldset legend={'new feed item'} srOnly={true}>
 					<TextBox ref='textBox' srOnly={true} label='message'
-          field="message" placeholder="What's up?"/>
+          field="message" placeholder="Wazzaaaap?"
+          defaultValue={defaultValue}/>
 				</Fieldset>
 			</Form>
 		);
@@ -24,7 +27,8 @@ class FeedBox extends Component {
 }
 
 FeedBox.propTypes = {
-	handler: PropTypes.func.isRequired
+	handler: PropTypes.func.isRequired,
+  defaultValue: PropTypes.string
 };
 
 export default FeedBox;

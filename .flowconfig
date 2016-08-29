@@ -19,6 +19,7 @@ src/js/
 src/js/interfaces/
 
 [options]
+suppress_comment= \\(.\\|\n\\)*\\flow-ignore
 module.name_mapper='^css\/\(.*\)' -> '<PROJECT_ROOT>/src/css/\1'
 module.name_mapper='^app\/\(.*\)' -> '<PROJECT_ROOT>/src/js/app/\1'
 module.name_mapper='^common\/\(.*\)' -> '<PROJECT_ROOT>/src/js/common/\1'

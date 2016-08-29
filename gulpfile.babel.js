@@ -1,3 +1,5 @@
+/* global __dirname */
+
 import tasks from './build';
 import args from 'yargs';
 
@@ -19,6 +21,6 @@ tasks.register({
 		manifest: './dist/js/manifest.json',
 		distIndexHtml: './dist/index.html',
     startJs: './src/js/start.js',
-		webpackConfig: './webpack.config.babel.js'
+		webpackConfig: __dirname + '/webpack.config.babel.js'
   }
 });
