@@ -1,18 +1,18 @@
-import {ADD_FEED_ITEM, REMOVE_FEED_ITEM, UPDATE_FEED_ITEM} from 'app/feed/constants';
+import * as Constants from 'app/feed/constants';
 import feedItem from './feedItem';
 
 let feedItems = (state = [], payload) => {
 	switch (payload.type) {
-		case ADD_FEED_ITEM:
+		case Constants.ADD_FEED_ITEM:
 			return [
 				feedItem(undefined, payload),
 				...state
 			];
-		case REMOVE_FEED_ITEM:
+		case Constants.REMOVE_FEED_ITEM:
 			return state.filter((item) => {
 				return item.id !== payload.id;
 			});
-		case UPDATE_FEED_ITEM:
+		case Constants.UPDATE_FEED_ITEM:
 			return state.map((item) => {
 				return item.id === payload.id ? feedItem(item, payload) : item;
 			});

@@ -1,14 +1,18 @@
-/* global location require module document $*/
+/* global window location require module document $*/
 import 'css/main';
 import 'bootstrap/dist/js/bootstrap';
 
 import {render} from 'react-dom';
+import {createStore} from 'redux';
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router';
 import Layout	 	from 'common/containers/appLayout';
 import NotFound from 'common/containers/notFound';
 
 class Application {
 	constructor(config) {
+    let devTools = window.devToolsExtension && window.devToolsExtension();
+
+    this.store = createStore(() => {}, devTools);
 		this.config = config || {
 			modules: []
 		};
@@ -26,7 +30,7 @@ class Application {
 			}
 
 			require(`bundle!app/${name}/routes`)((module) => {
-				callback(null, [module.default, notFoundRoute]);
+				callback(null, [module.default(this.store), notFoundRoute]);
 			});
 
 			return true;
@@ -46,7 +50,7 @@ class Application {
 			</Router>
 		);
 
-		$(document).ready(function () {
+		$(document).ready(() => {
 			render(router, document.querySelector('#app') || document.body);
 		});
 	}

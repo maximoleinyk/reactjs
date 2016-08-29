@@ -1,18 +1,21 @@
 {
   "parser": "babel-eslint",
   "extends": [
-		"eslint:recommended",
-		"plugin:react/recommended"
-	],
-	"plugins": [
+    "eslint:recommended",
+    "plugin:react/recommended"
+  ],
+  "plugins": [
     "react"
   ],
-	"parserOptions": {
+  "parserOptions": {
     "ecmaFeatures": {
       "jsx": true
     }
   },
-	"rules": {
-		"react/react-in-jsx-scope": 0
-	}
+  "rules": {
+    "react/react-in-jsx-scope": 0,
+    "max-len": [2, {
+      "code": 80
+    }]
+  }
 }

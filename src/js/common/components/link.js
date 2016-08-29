@@ -5,7 +5,9 @@ import {Link} from 'react-router';
 class NavLink extends Component {
 	render() {
 		return (
-			<Link {...this.props} activeClassName="active">
+			<Link {...this.props}
+            onlyActiveOnIndex={true}
+            activeClassName="active">
 				{this.props.children}
 			</Link>
 		);

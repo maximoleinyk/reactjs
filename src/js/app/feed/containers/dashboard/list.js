@@ -11,8 +11,8 @@ class FeedList extends Component {
 			return (
 				<div>
 					{
-						items.map((item) => {
-							return <FeedItem key={item.id} item={item} />;
+						items.map((item, i) => {
+							return <FeedItem key={i} item={item} />;
 						})
 					}
 				</div>

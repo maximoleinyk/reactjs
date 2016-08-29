@@ -30,7 +30,14 @@ Layout.propTypes = {
 	children: PropTypes.element.isRequired
 }
 
-export default {
-	path: 'account',
-	component: Layout
+export default (store) => {
+  store.replaceReducer((state = {}) => {
+    return state;
+  });
+
+	return {
+    path: 'account',
+    component: Layout,
+    store: store
+  };
 }

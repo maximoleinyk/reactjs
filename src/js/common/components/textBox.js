@@ -9,7 +9,8 @@ class TextBox extends Component {
 		return (
 			<div className="form-group">
 				<label className={className} htmlFor={field}>{label}</label>
-				<input ref='input' type="text" id={field} name={field} className="form-control form-control-lg" {...rest}/>
+				<input ref='input' type="text" id={field} name={field}
+              className="form-control form-control-lg" {...rest}/>
 			</div>
 		)
 	}

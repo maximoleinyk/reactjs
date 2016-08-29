@@ -1,6 +1,4 @@
-/* global window */
 import { PropTypes } from 'react';
-import {createStore, combineReducers} from 'redux';
 import Component from 'common/component';
 import Navigation from 'common/components/navigation';
 
@@ -8,10 +6,7 @@ class PageLayout extends Component {
 	constructor(props, context) {
 		super(props, context);
 
-		let reducers = combineReducers(props.route.reducers);
-		let devTools = window.devToolsExtension && window.devToolsExtension();
-
-		this.store = createStore(reducers, devTools);
+		this.store = props.route.store;
 	}
 
 	getChildContext() {
