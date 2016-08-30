@@ -12,6 +12,7 @@ if (browser.isCompatible()) {
   // flow-ignore
   require(['app'], (Application) => {
     const app = new Application(config);
+
     app.start();
   });
 }

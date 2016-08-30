@@ -6,7 +6,7 @@ app.use(logger());
 app.use('/static', express.static(__dirname + '/dist'));
 
 app.get('/page*', function(req, res) {
-	return res.sendFile('src/index.html', {
+	return res.sendFile('dist/index.html', {
 		root: __dirname
 	});
 });

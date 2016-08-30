@@ -5,6 +5,7 @@ import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import FlowStatusWebpackPlugin from 'flow-status-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 let getModules = () => {
 	const modulesDir = `${__dirname}/src/js/app`;
@@ -70,17 +71,44 @@ let config = {
 	},
 
 	plugins: [
-		new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, new RegExp('ru')),
+		new FlowStatusWebpackPlugin({
+			failOnError: true
+		}),
 		new webpack.ProvidePlugin({
 			React: 'react',
 			jQuery: 'jquery',
 			$: 'jquery',
 			'window.Tether': 'tether'
 		}),
+		new webpack.ContextReplacementPlugin(
+			/node_modules\/moment\/locale/,
+			new RegExp('ru')
+		),
+		new webpack.optimize.CommonsChunkPlugin({
+			children: true
+		}),
 		new webpack.optimize.OccurenceOrderPlugin(),
-		new webpack.optimize.DedupePlugin(),
-		new FlowStatusWebpackPlugin({
-			failOnError: true
+		new HtmlWebpackPlugin({
+			title: 'Webpack application',
+			filename: 'index.html',
+			template: './index.html',
+			favicon: './favicon.ico',
+			minify: {
+				html5: true,
+				removeComments: true,
+				useShortDoctype: true,
+				removeTagWhitespace: true,
+				removeStyleLinkTypeAttributes: true,
+				removeScriptTypeAttributes: true,
+				removeRedundantAttributes: true,
+				removeOptionalTags: true,
+				processConditionalComments: true,
+				minifyCSS: true,
+				minifyJS: true,
+				keepClosingSlash: true,
+				collapseWhitespace: true
+			},
+			hash: true
 		})
 	]
 };
@@ -106,7 +134,8 @@ if (process.env.NODE_ENV === 'production') {
 				compressor: {
 					warnings: false
 				}
-			})
+			}),
+			new webpack.optimize.DedupePlugin()
 		],
 
 		module: {
