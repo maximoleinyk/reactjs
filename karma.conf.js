@@ -47,7 +47,8 @@ module.exports = function(config) {
 				loaders: [
 					{
 						test: /\.js$/,
-						// do not include istanbul plugin to global babel config it will break the build
+            // do not include istanbul plugin to global babel config
+            // it will break the build
 						loader: 'babel?plugins[]=istanbul',
 						exclude: /node_modules/
 					},
@@ -83,7 +84,10 @@ module.exports = function(config) {
 			},
 
 			plugins: [
-				new webpack.ContextReplacementPlugin(/node_modules\/moment\/locale/, new RegExp('en')),
+				new webpack.ContextReplacementPlugin(
+          /node_modules\/moment\/locale/, 
+          new RegExp('en')
+        ),
 				new webpack.DefinePlugin({
 					MODULES: JSON.stringify([]),
 					VERSION: JSON.stringify('__TEST__'),

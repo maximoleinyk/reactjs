@@ -48,6 +48,7 @@
     "del": "^2.2.1",
     "eslint": "^3.4.0",
     "eslint-loader": "^1.5.0",
+    "eslint-plugin-flowtype": "^2.11.4",
     "eslint-plugin-react": "^6.1.2",
     "event-stream": "^3.3.3",
     "exports-loader": "^0.6.3",
