@@ -7,7 +7,6 @@ temp
 npm-debug.log
 .DS_Store
 coverage
-state.json
 
 src/js/vendor
 src/css/all.css.map
