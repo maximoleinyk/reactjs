@@ -167,14 +167,21 @@ if (process.env.NODE_ENV === 'production') {
 	config = {
 		...config,
 
-		devtool: 'source-map',
+		devtool: 'inline-source-map',
 
 		devServer: {
 			host: 'localhost',
 			port: '8080',
-			proxy: {
-				'/page': 'http://localhost:3000'
-			}
+			proxy: [
+				{
+					path: '/page',
+					target: 'http://localhost:3000'
+				},
+				{
+					path: '/api',
+					target: 'http://localhost:3000'
+				}
+			]
 		},
 
 		plugins: [

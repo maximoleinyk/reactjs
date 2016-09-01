@@ -1,38 +1,60 @@
+/* global $ */
 import {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Component from 'common/component';
 import FeedItem from './item';
+import {requestItems, feedItemsReceived} from './actions';
 
 class FeedList extends Component {
-	render() {
-		let items = this.props.items || [];
+  render() {
+    let {items, isFetching} = this.props.data;
 
-		if (items.length) {
-			return (
-				<div>
-					{
-						items.map((item, i) => {
-							return <FeedItem key={i} item={item} />;
-						})
-					}
-				</div>
-			);
-		}
+    if (isFetching) {
+      return <div className="text-sm-center">Loading...</div>
+    }
 
-		return (
-			<div className="col-xs-12 text-sm-center">No items</div>
-		);
-	}
+    if (!items.length) {
+      return <div className=" text-sm-center">No items</div>;
+    }
+
+    return (
+      <div>
+      {items.map((item, i) => {
+        return <FeedItem key={i} item={item} />;
+      })}
+      </div>
+    );
+  }
+
+  componentDidMount() {
+    this.props.requestItems();
+  }
 }
 
 let mapStateToProps = (state) => {
-	return {
-		items: state.feedItems
-	};
+  return {
+    data: state.feedItems
+  };
+};
+
+let mapDispatchToProps = (dispatch) => {
+  return {
+    requestItems: () => {
+      dispatch(requestItems());
+      $.get('/api/feed')
+        .then((response) => {
+          dispatch(feedItemsReceived(response));
+        });
+    }
+  };
 };
 
 FeedList.propTypes = {
-	items: PropTypes.array.isRequired
+  data: PropTypes.shape({
+    items: PropTypes.array.isRequired,
+    isFetching: PropTypes.bool.isRequired
+  }).isRequired,
+  requestItems: PropTypes.func.isRequired
 };
 
-export default connect(mapStateToProps)(FeedList);
+export default connect(mapStateToProps, mapDispatchToProps)(FeedList);

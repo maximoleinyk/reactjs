@@ -24,4 +24,19 @@ let update = (data) => {
 	};
 };
 
-export {create, remove, update};
+let requestItems = () => {
+  return {
+    type: Constants.REQUEST_ITEMS
+  };
+};
+
+let feedItemsReceived = (response) => {
+  counter = response.length + 1;
+
+  return {
+    type: Constants.REQUEST_ITEMS_SUCCESS,
+    response
+  };
+};
+
+export {create, remove, update, requestItems, feedItemsReceived};

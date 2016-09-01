@@ -1,20 +1,45 @@
 import * as Constants from 'app/feed/constants';
 
-let feedItems = (state = [], payload) => {
+let feedItems = (state = {
+  items: [],
+  isFetching: false
+}, payload) => {
 	switch (payload.type) {
+    case Constants.REQUEST_ITEMS:
+      return {
+        ...state,
+        isFetching: true
+      };
+    case Constants.REQUEST_ITEMS_SUCCESS:
+      return {
+        ...state,
+        items: [
+          ...payload.response
+        ],
+        isFetching: false
+      };
 		case Constants.ADD_FEED_ITEM:
-			return [
-        {...payload},
-				...state
-			];
+			return {
+        ...state,
+        items: [
+          {...payload},
+          ...state.items
+        ]
+			};
 		case Constants.REMOVE_FEED_ITEM:
-			return state.filter((item) => {
-				return item.id !== payload.id;
-			});
+			return {
+        ...state,
+        items: state.items.filter((item) => {
+          return item.id !== payload.id;
+        })
+      };
 		case Constants.UPDATE_FEED_ITEM:
-			return state.map((item) => {
-				return item.id === payload.id ? {...payload} : item;
-			});
+			return {
+        ...state,
+        items: state.items.map((item) => {
+          return item.id === payload.id ? {...payload} : item;
+        })
+      };
 		default:
 			return state;
 	}
