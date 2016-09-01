@@ -5,7 +5,7 @@ let feedItems = (state = {
   isFetching: false
 }, payload) => {
 	switch (payload.type) {
-    case Constants.REQUEST_ITEMS:
+    case Constants.REQUEST_FEED:
       return {
         ...state,
         isFetching: true

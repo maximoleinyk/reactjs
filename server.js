@@ -16,10 +16,12 @@ app.get('/page*', function(req, res) {
 var data = [];
 
 app.get('/api/feed', function(request, response) {
-  return response.status(200).send({
-    data: data,
-    total: data.length
-  });
+  setTimeout(function() {
+    response.status(200).send({
+      data: data,
+      total: data.length
+    });
+  }, 3000);
 });
 
 app.post('/api/feed', function(request, response) {

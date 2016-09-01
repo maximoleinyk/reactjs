@@ -1,6 +1,7 @@
 /* global location require module document $*/
 import 'css/main';
 import 'bootstrap/dist/js/bootstrap';
+import 'whatwg-fetch';
 
 import {render} from 'react-dom';
 import {Router, Route, IndexRedirect, browserHistory} from 'react-router';
