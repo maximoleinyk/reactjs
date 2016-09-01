@@ -1,11 +1,11 @@
 import * as Constants from 'app/feed/constants';
 
-let counter = 0;
+let ID = 0;
 
 let create = (text) => {
 	return {
 		type: Constants.ADD_FEED_ITEM,
-    id: counter++,
+    id: ID++,
 		text
 	};
 };
@@ -24,19 +24,19 @@ let update = (data) => {
 	};
 };
 
-let requestItems = () => {
+let requestFeed = () => {
   return {
-    type: Constants.REQUEST_ITEMS
+    type: Constants.REQUEST_FEED
   };
 };
 
-let feedItemsReceived = (response) => {
+let feedReceived = (response) => {
   counter = response.length + 1;
 
   return {
-    type: Constants.REQUEST_ITEMS_SUCCESS,
+    type: Constants.REQUEST_FEED_SUCCESS,
     response
   };
 };
 
-export {create, remove, update, requestItems, feedItemsReceived};
+export {create, remove, update, requestFeed, feedReceived};

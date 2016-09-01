@@ -10,11 +10,11 @@ let feedItems = (state = {
         ...state,
         isFetching: true
       };
-    case Constants.REQUEST_ITEMS_SUCCESS:
+    case Constants.REQUEST_FEED_SUCCESS:
       return {
         ...state,
         items: [
-          ...payload.response
+          ...payload.response.data
         ],
         isFetching: false
       };

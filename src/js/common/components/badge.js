@@ -8,7 +8,7 @@ let FeedNavLink = (props) => {
 
   return (
     <div>
-       {props.children} <span className="badge">{node}</span>
+      {props.children} <span className="badge">{node}</span>
     </div>
   );
 };
@@ -20,6 +20,6 @@ FeedNavLink.propTypes = {
 
 export default connect((state) => {
   return {
-    counter: state.feedItems && state.feedItems.items.length || 0
+    counter: state.feed && state.feed.items.length || 0
   };
 })(FeedNavLink);

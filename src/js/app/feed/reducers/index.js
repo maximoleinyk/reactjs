@@ -1,8 +1,8 @@
-import feedItems from './feedItems';
+import feed from './feed';
 
 let feedReducer = (reducers) => {
   return {
-    feedItems,
+    feed,
     ...reducers
   };
 }

@@ -2,7 +2,6 @@ import {PropTypes} from 'react';
 import {connect} from 'react-redux';
 import Component from 'common/component';
 import Input from './input';
-import {remove, update} from './actions';
 
 class Item extends Component {
 	constructor() {
@@ -13,7 +12,7 @@ class Item extends Component {
 		};
 	}
 
-	updateItem() {
+	update() {
 		const value = this.refs.input.getValue();
 
 		if (!value.length) {
@@ -29,11 +28,17 @@ class Item extends Component {
 		});
 	}
 
+  remove(e)  {
+    e.preventDefault();
+
+    this.props.remove(this.props.item.id);
+  }
+
 	render() {
 		let input = (
 			<div className="flex">
 				<div className="flex-grow-1 ellipsis">
-					<Input ref='input' handler={this.updateItem.bind(this)}
+					<Input ref='input' handler={this.update.bind(this)}
 						defaultValue={this.props.item.text}/>
 				</div>
 			</div>
@@ -41,10 +46,10 @@ class Item extends Component {
 		let text = (
 			<div className="flex">
 				<div className="flex-grow-1 ellipsis"
-             onDoubleClick={() => this.setState({ readMode: false })}>
+          onDoubleClick={() => this.setState({ readMode: false })}>
 					{this.props.item.text}
 				</div>
-        <a href="#" onClick={this.props.remove.bind(this)}>
+        <a href="#" onClick={this.remove.bind(this)}>
           <span className="fa fa-close"></span>
         </a>
 			</div>
@@ -60,18 +65,4 @@ Item.propTypes = {
   update: PropTypes.func.isRequired
 };
 
-let mapDispatchToProps = (dispatch, props) => {
-  return {
-    remove(e)  {
-      e.preventDefault();
-
-      dispatch(remove(props.item.id));
-    },
-
-    update(value) {
-      dispatch(update(value));
-    }
-  };
-}
-
-export default connect(undefined, mapDispatchToProps)(Item);
+export default connect()(Item);

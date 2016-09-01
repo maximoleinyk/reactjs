@@ -1,9 +1,10 @@
 /* global $ */
 import {PropTypes} from 'react';
+import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import Component from 'common/component';
 import FeedItem from './item';
-import {requestItems, feedItemsReceived} from './actions';
+import {requestFeed, feedReceived, remove, update} from './actions';
 
 class FeedList extends Component {
   render() {
@@ -17,35 +18,40 @@ class FeedList extends Component {
       return <div className=" text-sm-center">No items</div>;
     }
 
+    let actions = bindActionCreators({ remove, update }, this.props.dispatch);
+
     return (
       <div>
-      {items.map((item, i) => {
-        return <FeedItem key={i} item={item} />;
-      })}
+        {
+          items.map((item, i) => {
+            return <FeedItem key={i} item={item} {...actions}/>;
+          })
+        }
       </div>
     );
   }
 
   componentDidMount() {
-    this.props.requestItems();
+    this.props.requestFeed();
   }
 }
 
 let mapStateToProps = (state) => {
   return {
-    data: state.feedItems
+    data: state.feed
   };
 };
 
 let mapDispatchToProps = (dispatch) => {
   return {
-    requestItems: () => {
-      dispatch(requestItems());
+    requestFeed: () => {
+      dispatch(requestFeed());
       $.get('/api/feed')
         .then((response) => {
-          dispatch(feedItemsReceived(response));
+          dispatch(feedReceived(response));
         });
-    }
+    },
+    dispatch
   };
 };
 
@@ -54,7 +60,8 @@ FeedList.propTypes = {
     items: PropTypes.array.isRequired,
     isFetching: PropTypes.bool.isRequired
   }).isRequired,
-  requestItems: PropTypes.func.isRequired
+  requestFeed: PropTypes.func.isRequired,
+  dispatch: PropTypes.func.isRequired
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(FeedList);
