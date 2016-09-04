@@ -15,13 +15,25 @@ class TextBox extends Component {
 		)
 	}
 
-	componentDidMount() {
-		this.refs.input.focus();
-	}
+  focus() {
+    this.refs.input.focus();
+  }
+
+	disable() {
+    this.refs.input.setAttribute('disabled', 'disabled');
+  }
+
+  enable() {
+    this.refs.input.removeAttribute('disabled');
+  }
 
 	getValue() {
 		return this.refs.input.value;
 	}
+
+  select() {
+    return this.refs.input.select();
+  }
 
 	clear() {
 		this.refs.input.value = '';

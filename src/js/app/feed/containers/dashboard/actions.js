@@ -1,61 +1,31 @@
-/* global fetch */
-import * as Constants from 'app/feed/constants';
+import {http, urls} from 'common';
 
-let ID_COUNTER = 0;
-
-let create = (text) => {
-	return {
-		type: Constants.ADD_FEED_ITEM,
-    id: ID_COUNTER++,
-		text
-	};
+let requestFeed = () => {
+  return http.get(urls.feed).entity('feed').send();
 };
 
-let remove = (id) => {
-	return {
-		type: Constants.REMOVE_FEED_ITEM,
-		id
-	};
+let create = (text) => {
+  return http.post(urls.feed).entity('feed_item').send({
+    text
+  });
 };
 
 let update = (data) => {
-	return {
-		type: Constants.UPDATE_FEED_ITEM,
-		...data
-	};
+  const url = urls.feedItem({
+    id: data.id
+  });
+
+  return http.put(url).entity('feed_item').send(data);
 };
 
-let requestFeed = () => {
-  return (dispatch) => {
-    dispatch({
-      type: Constants.REQUEST_FEED
-    });
+let remove = (id) => {
+  const url = urls.feedItem({
+    id
+  });
 
-    return fetch('/api/feed')
-      .then(response => response.json())
-      .then((response) => {
-        dispatch(feedReceived(response));
-      })
-      .catch((response) => {
-        dispatch(feedFailed(response));
-      });
-  };
+  return http.del(url).entity('feed_item').send({
+    id
+  });
 };
 
-let feedReceived = (response) => {
-  ID_COUNTER = response.data.length + 1;
-
-  return {
-    type: Constants.REQUEST_FEED_SUCCESS,
-    response
-  };
-};
-
-let feedFailed = (response) => {
-	return {
-		type: Constants.REQUEST_FEED_ERROR,
-		response
-	};
-};
-
-export {create, remove, update, requestFeed, feedFailed, feedReceived};
+export {create, remove, update, requestFeed};

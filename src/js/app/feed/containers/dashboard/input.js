@@ -17,13 +17,34 @@ class FeedBox extends Component {
 		);
 	}
 
+  componentDidMount() {
+    this.refs.textBox.select();
+  }
+
+  focus() {
+    this.refs.textBox.focus();
+  }
+
+  enable(flag = true) {
+    if (!flag) {
+      this.refs.textBox.disable();
+      return;
+    }
+
+    this.refs.textBox.enable();
+  }
+
 	getValue() {
 		return this.refs.textBox.getValue().trim();
 	}
 
 	clear() {
-		return this.refs.textBox.clear();
+		this.refs.textBox.clear();
 	}
+
+  select() {
+    this.refs.textBox.select();
+  }
 }
 
 FeedBox.propTypes = {

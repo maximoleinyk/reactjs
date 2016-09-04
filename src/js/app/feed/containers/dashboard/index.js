@@ -30,8 +30,16 @@ class Feed extends Component {
 			return;
 		}
 
-		this.props.dispatch(create(value));
-		this.refs.input.clear();
+    this.refs.input.enable(false);
+		this.props.dispatch(create(value))
+      .then(() => {
+        this.refs.input.enable(true);
+        this.refs.input.clear();
+        this.refs.input.focus();
+      })
+      .catch(() => {
+        this.refs.input.enable(true);
+      });
 	}
 }
 

@@ -13,6 +13,7 @@ app.get('/page*', function(req, res) {
 	});
 });
 
+var id = 0;
 var data = [];
 
 app.get('/api/feed', function(request, response) {
@@ -21,15 +22,18 @@ app.get('/api/feed', function(request, response) {
       data: data,
       total: data.length
     });
-  }, 3000);
+  }, 1000);
 });
 
 app.post('/api/feed', function(request, response) {
-  var id = data.length + 1;
   var newObject = {
-    id: id,
+    id: id++,
     text: request.body.text
   };
+
+  data.push(newObject);
+
+    console.log(data);
 
   return response.status(200).send(newObject);
 });
@@ -42,14 +46,19 @@ app.put('/api/feed/:id', function(request, response) {
     item.text = request.body.text;
   });
 
+    console.log(data);
+
   return response.status(200).send(request.body);
 });
 
 app.del('/api/feed/:id', function(request, response) {
   data = data.filter(function(item) {
-    return item.id !== request.body.id;
+    return +item.id !== +request.params.id;
   });
-  return response.status(204);
+
+  console.log(data);
+
+  return response.status(204).send();
 });
 
 app.listen(3000);

@@ -1,5 +1,5 @@
 import { PropTypes } from 'react';
-import Component from 'common/component';
+import { Component } from 'common';
 import Navigation from 'common/components/navigation';
 
 class PageLayout extends Component {

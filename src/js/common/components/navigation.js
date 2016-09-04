@@ -1,6 +1,5 @@
-import Component from 'common/component';
-import {Link} from 'common/components';
-import {Badge} from 'common/components';
+import {Component} from 'common';
+import {Link, Badge} from 'common/components';
 
 class Navigation extends Component {
 	render() {
