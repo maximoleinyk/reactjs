@@ -174,11 +174,11 @@ if (process.env.NODE_ENV === 'production') {
 			port: '8080',
 			proxy: [
 				{
-					path: '/page',
+					path: '/page*',
 					target: 'http://localhost:3000'
 				},
 				{
-					path: '/api',
+					path: '/api*',
 					target: 'http://localhost:3000'
 				}
 			]
