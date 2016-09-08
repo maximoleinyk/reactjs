@@ -40,21 +40,21 @@ class Item extends Component {
 
   render() {
     let input = (
-      <div className="flex">
-        <div className="flex-grow-1 ellipsis">
+      <div class="flex">
+        <div class="flex-grow-1 ellipsis">
           <Input ref='input' handler={this.update.bind(this)}
           defaultValue={this.props.item.text}/>
         </div>
       </div>
     );
     let text = (
-      <div className="flex">
-        <div className="flex-grow-1 ellipsis"
+      <div class="flex">
+        <div class="flex-grow-1 ellipsis"
           onDoubleClick={this.makeEditable.bind(this)}>
           {this.props.item.text}
         </div>
         <a href="#" onClick={this.remove.bind(this)}>
-          <span className="fa fa-close"></span>
+          <span class="fa fa-close"></span>
         </a>
       </div>
     );

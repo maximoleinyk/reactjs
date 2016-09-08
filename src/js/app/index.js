@@ -1,4 +1,4 @@
-/* global location require module document $*/
+/* global location require document $*/
 import 'css/main';
 import 'bootstrap/dist/js/bootstrap';
 import 'whatwg-fetch';
@@ -29,7 +29,7 @@ class Application {
 			}
 
 			require(`bundle!app/${name}/routes`)((module) => {
-				callback(null, [module.default(this.store), notFoundRoute]);
+				callback(null, [module(this.store), notFoundRoute]);
 			});
 
 			return true;
@@ -55,5 +55,4 @@ class Application {
 	}
 }
 
-// to avoid doing new app.defaults(); in start.js
-module.exports = Application;
+export default Application;

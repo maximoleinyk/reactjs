@@ -3,12 +3,12 @@ import {PropTypes} from 'react';
 
 let FeedNavLink = (props) => {
   let {counter} = props;
-  let badge = <span className="counter-badge">{counter}</span>
+  let badge = <span class="counter-badge">{counter}</span>
   let node = counter ? badge : '';
 
   return (
     <div>
-      {props.children} <span className="badge">{node}</span>
+      {props.children} <span class="badge">{node}</span>
     </div>
   );
 };

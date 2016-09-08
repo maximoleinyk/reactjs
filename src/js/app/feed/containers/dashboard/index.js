@@ -8,14 +8,14 @@ import {create} from './actions';
 class Feed extends Component {
 	render() {
 		return (
-			<div className="container app-feed">
-				<div className="row">
-					<section className="col-xs-12">
+			<div class="container app-feed">
+				<div class="row">
+					<section class="col-xs-12">
 						<Input ref='input' handler={this.create.bind(this)}/>
 					</section>
 				</div>
-				<div className="row">
-					<section className="col-xs-12">
+				<div class="row">
+					<section class="col-xs-12">
 						<List />
 					</section>
 				</div>

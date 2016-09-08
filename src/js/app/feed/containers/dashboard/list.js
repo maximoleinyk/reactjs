@@ -15,11 +15,11 @@ class FeedList extends Component {
     let {items, isFetching} = this.props.data;
 
     if (isFetching) {
-      return <div className="text-sm-center">Loading...</div>
+      return <div class="text-sm-center">Loading...</div>
     }
 
     if (!items.length) {
-      return <div className=" text-sm-center">No items</div>;
+      return <div class=" text-sm-center">No items</div>;
     }
 
     let actions = bindActionCreators({ remove, update }, this.props.dispatch);

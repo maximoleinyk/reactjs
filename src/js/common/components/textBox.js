@@ -7,10 +7,10 @@ class TextBox extends Component {
 		let className = srOnly ? 'sr-only' : '';
 
 		return (
-			<div className="form-group">
-				<label className={className} htmlFor={field}>{label}</label>
+			<div class="form-group">
+				<label class={className} htmlFor={field}>{label}</label>
 				<input ref='input' type="text" id={field} name={field}
-              className="form-control form-control-lg" {...rest}/>
+              class="form-control form-control-lg" {...rest}/>
 			</div>
 		)
 	}

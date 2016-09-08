@@ -4,7 +4,7 @@ import Component from 'common/component';
 class AppLayout extends Component {
 	render() {
 		return (
-			<main className='app'>
+			<main class='app'>
 				{this.props.children}
 			</main>
 		);

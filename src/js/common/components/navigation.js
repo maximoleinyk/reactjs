@@ -4,17 +4,17 @@ import {Link, Badge} from 'common/components';
 class Navigation extends Component {
 	render() {
 		return (
-			<div className="container">
-				<div className="row">
-					<div className="col-xs-12">
-						<nav className="navbar navbar-dark">
-							<div className="nav navbar-nav">
-                <Link to="/page/feed" className="nav-link nav-item">
+			<div class="container">
+				<div class="row">
+					<div class="col-xs-12">
+						<nav class="navbar navbar-dark">
+							<div class="nav navbar-nav">
+                <Link to="/page/feed" class="nav-link nav-item">
                   <Badge>
                     <span>Feed</span>
                   </Badge>
                 </Link>
-                <Link to="/page/settings" className="nav-link nav-item">
+                <Link to="/page/settings" class="nav-link nav-item">
                   Settings
                 </Link>
 							</div>

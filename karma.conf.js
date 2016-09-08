@@ -6,7 +6,7 @@ var autoprefixer = require('autoprefixer');
 
 module.exports = function(config) {
 	config.set({
-		singleRun: false,
+		singleRun: true,
 
 		browsers: ['PhantomJS'],
 
@@ -85,7 +85,7 @@ module.exports = function(config) {
 
 			plugins: [
 				new webpack.ContextReplacementPlugin(
-          /node_modules\/moment\/locale/, 
+          /node_modules\/moment\/locale/,
           new RegExp('en')
         ),
 				new webpack.DefinePlugin({

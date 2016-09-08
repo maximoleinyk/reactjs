@@ -5,7 +5,7 @@ const FieldSet = (props) => {
 
   return (
     <fieldset>
-      <legend className={srOnly ? 'sr-only' : ''} {...rest}>{legend}</legend>
+      <legend class={srOnly ? 'sr-only' : ''} {...rest}>{legend}</legend>
       {children}
     </fieldset>
   )
