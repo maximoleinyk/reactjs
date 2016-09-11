@@ -1,11 +1,11 @@
 {
   "name": "reactjs",
   "version": "1.0.0",
-  "description": "ReactJS, gulp, ES6, babel",
+  "description": "ReactJS, webpack, ES6, babel",
   "main": "index.js",
   "scripts": {
     "start": "node server.js",
-    "build": "node ./node_modules/webpack/bin/webpack.js",
+    "webpack": "node ./node_modules/webpack/bin/webpack.js",
     "dev": "webpack-dev-server --inline --hot",
     "test": "node ./node_modules/karma/bin/karma start"
   },
@@ -15,7 +15,7 @@
   },
   "keywords": [
     "ReactJS",
-    "gulp",
+    "webpack",
     "ES6",
     "babel"
   ],
@@ -25,9 +25,8 @@
     "url": "https://github.com/maximoleinyk/reactjs/issues"
   },
   "homepage": "https://github.com/maximoleinyk/reactjs#readme",
-  "devDependencies": {
+  "dependencies": {
     "autoprefixer": "^6.4.0",
-    "babel": "^6.5.2",
     "babel-core": "^6.11.4",
     "babel-eslint": "^6.1.2",
     "babel-loader": "^6.2.4",
@@ -42,12 +41,10 @@
     "babel-preset-es2015": "^6.9.0",
     "babel-preset-react": "^6.11.1",
     "babel-preset-react-hmre": "^1.1.1",
-    "babel-register": "^6.9.0",
     "body-parser": "^1.15.2",
     "bundle-loader": "^0.5.4",
     "chai": "^3.5.0",
     "css-loader": "^0.23.1",
-    "del": "^2.2.1",
     "eslint": "^3.4.0",
     "eslint-loader": "^1.5.0",
     "eslint-plugin-flowtype": "^2.11.4",
@@ -80,9 +77,7 @@
     "sass-loader": "^4.0.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.1",
-    "webpack-dev-server": "^1.14.1"
-  },
-  "dependencies": {
+    "webpack-dev-server": "^1.14.1",
     "bootstrap": "^4.0.0-alpha.3",
     "font-awesome": "^4.6.3",
     "history": "^2.0.0",
