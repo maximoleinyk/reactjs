@@ -1,6 +1,7 @@
 /* global location require document $*/
 import 'css/main';
 import 'bootstrap/dist/js/bootstrap';
+import 'babel-polyfill';
 import 'whatwg-fetch';
 
 import {render} from 'react-dom';

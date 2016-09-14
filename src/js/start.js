@@ -1,5 +1,5 @@
 // @flow
-/* global MODULES VERSION LOCALE module require */
+/* global MODULES VERSION LOCALE require */
 import browser from 'common/browser';
 
 const config = {
@@ -17,4 +17,4 @@ if (browser.isCompatible()) {
   });
 }
 
-module.exports = config;
+export default config;
