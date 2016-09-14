@@ -1,5 +1,6 @@
 .git
 .idea
+.vagrant
 stats.json
 dist
 node_modules
