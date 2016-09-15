@@ -6,10 +6,13 @@
 	"plugins": [
 		"transform-object-rest-spread",
     "transform-class-properties",
+    "transform-react-constant-elements",
+    "transform-react-jsx-source",
+    "transform-strict-mode",
     "transform-decorators",
-    "add-module-exports",
-    "transform-es3-property-literals",
     "transform-es3-member-expression-literals",
+    "transform-es3-property-literals",
+    "add-module-exports",
     "react-html-attrs"
 	],
 	"compact": true
