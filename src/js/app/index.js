@@ -11,49 +11,49 @@ import NotFound from 'common/containers/notFound';
 import createStore from 'common/createStore';
 
 class Application {
-	constructor(config) {
-		this.config = config || {
-			modules: []
-		};
+  constructor(config) {
+    this.config = config || {
+      modules: []
+    };
     this.store = createStore();
-	}
+  }
 
-	isAuthenticated(nextState, replace, callback) {
-		callback();
-	}
+  isAuthenticated(nextState, replace, callback) {
+    callback();
+  }
 
-	getChildRoutes(state, callback) {
-		const notFoundRoute = <Route path="*" component={NotFound}></Route>;
-		const wasFound = this.config.modules.some((name) => {
-			if (!location.pathname.startsWith('/page/' + name)) {
-				return;
-			}
+  getChildRoutes(state, callback) {
+    const notFoundRoute = <Route path="*" component={NotFound}></Route>;
+    const wasFound = this.config.modules.some((name) => {
+      if (!location.pathname.startsWith('/page/' + name)) {
+        return;
+      }
 
-			require(`bundle!app/${name}/routes`)((module) => {
-				callback(null, [module(this.store), notFoundRoute]);
-			});
+      require(`bundle!app/${name}/routes`)((module) => {
+        callback(null, [module(this.store), notFoundRoute]);
+      });
 
-			return true;
-		});
+      return true;
+    });
 
-		!wasFound && callback(null, [notFoundRoute]);
-	}
+    !wasFound && callback(null, [notFoundRoute]);
+  }
 
-	start() {
-		let router = (
-			<Router history={browserHistory}>
-				<Route path="/page" component={Layout}
-							getChildRoutes={this.getChildRoutes.bind(this)}
-							onEnter={this.isAuthenticated.bind(this)}>
-					<IndexRedirect to="/page/feed" />
-				</Route>
-			</Router>
-		);
+  start() {
+    let router = (
+      <Router history={browserHistory}>
+      <Route path="/page" component={Layout}
+      getChildRoutes={this.getChildRoutes.bind(this)}
+      onEnter={this.isAuthenticated.bind(this)}>
+      <IndexRedirect to="/page/feed" />
+      </Route>
+      </Router>
+    );
 
-		$(document).ready(() => {
-			render(router, document.querySelector('#app') || document.body);
-		});
-	}
+    $(document).ready(() => {
+      render(router, document.querySelector('#app') || document.body);
+    });
+  }
 }
 
 export default Application;

@@ -3,7 +3,7 @@ require('babel-core/register');
 
 var path = require('path');
 var fs = require('fs');
-var config = require('./build/' + process.env.NODE_ENV || 'development');
+var config = require('./build/' + (process.env.NODE_ENV || 'development'));
 
 var getModules = function() {
   var modulesDir = path.resolve(__dirname, './src/js/app');

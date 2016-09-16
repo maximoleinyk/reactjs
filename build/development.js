@@ -10,16 +10,15 @@ export default function (config) {
     entry: {
       start: './js/start',
       vendor: [
-        'react',
-        'jquery',
         'moment',
-        'react-redux',
+        'jquery',
         'history',
+        'redux',
+        'redux-thunk',
+        'react',
         'react-dom',
         'react-router',
         'react-redux',
-        'redux',
-        'redux-thunk',
         'tether',
         'whatwg-fetch',
         'babel-polyfill',
@@ -52,21 +51,21 @@ export default function (config) {
       chunkFilename: 'js/[name].js?hash=[hash]'
     },
 
-		resolve: {
-	    alias: {
-	      css: path.resolve(config.src, './css'),
-	      app: path.resolve(config.src, './js/app'),
-	      common: path.resolve(config.src, './js/common')
-	    },
-	    modulesDirectories: ['node_modules', 'src/js'],
-	    extensions: ['', '.js', '.jsx', '.scss', '.css']
-	  },
+    resolve: {
+      alias: {
+        css: path.resolve(config.src, './css'),
+        app: path.resolve(config.src, './js/app'),
+        common: path.resolve(config.src, './js/common')
+      },
+      modulesDirectories: ['node_modules', 'src/js'],
+      extensions: ['', '.js', '.jsx', '.scss', '.css']
+    },
 
-		resolveLoader: {
-	    modulesDirectories: ['node_modules'],
-	    moduleTemplates: ['*-loader'],
-	    extensions: ['', '.js', '.scss', '.css']
-	  },
+    resolveLoader: {
+      modulesDirectories: ['node_modules'],
+      moduleTemplates: ['*-loader'],
+      extensions: ['', '.js', '.scss', '.css']
+    },
 
     sassLoader: {
       data: '$fa-font-path: "~font-awesome/fonts";'
@@ -127,7 +126,7 @@ export default function (config) {
       new webpack.optimize.CommonsChunkPlugin({
         name: 'vendor',
         filename: 'js/vendor.js',
-        minChunks: Infinity
+        chunks: ['start']
       }),
       new webpack.optimize.OccurenceOrderPlugin(),
       new HtmlWebpackPlugin({
