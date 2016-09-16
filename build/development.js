@@ -1,0 +1,131 @@
+import path from 'path';
+import webpack from 'webpack';
+import autoprefixer from 'autoprefixer';
+import FlowStatusWebpackPlugin from 'flow-status-webpack-plugin';
+import HtmlWebpackPlugin from 'html-webpack-plugin';
+
+export default function (config) {
+  return {
+    context: config.src,
+
+    entry: {
+      start: './js/start'
+    },
+
+    devtool: 'source-map',
+
+    devServer: {
+      host: 'localhost',
+      port: '8080',
+      proxy: [
+        {
+          path: '/page',
+          target: 'http://localhost:3000'
+        },
+        {
+          path: '/api',
+          target: 'http://localhost:3000'
+        }
+      ]
+    },
+
+    output: {
+      path: config.dist,
+      publicPath: `/static/`,
+      library: 'about', // wrap start.js with about variable
+      filename: 'js/[name].js?hash=[hash]',
+      chunkFilename: 'js/[name].js?hash=[hash]'
+    },
+
+    resolve: config.resolve,
+
+    resolveLoader: config.resolveModule,
+
+    sassLoader: {
+      data: '$fa-font-path: "~font-awesome/fonts";'
+    },
+
+    postcss() {
+      return [autoprefixer({
+        browsers: ['last 2 version']
+      })];
+    },
+
+    eslint: {
+      configFile: '.eslintrc'
+    },
+
+    module: {
+      preLoaders: [
+        {
+          test: /\.(js|jsx)$/,
+          loaders: ['babel', 'eslint'],
+          exclude: /node_modules/
+        }
+      ],
+      loaders: [
+        {
+          test: /\.(jsx|js)$/,
+          loaders: ['react-hot', 'babel'],
+          exclude: /node_modules/
+        },
+        {
+          test: /\.(eot|svg|ttf|woff|woff2)(\?.*$|$)/,
+          loader: `file?name=fonts/[name].[ext]`
+        },
+        {
+          test: /\.scss$/,
+          loader: 'style!css!postcss!sass?sourceMap',
+          include: path.resolve(config.src, './css')
+        }
+      ]
+    },
+
+    plugins: [
+      new FlowStatusWebpackPlugin({
+        failOnError: false
+      }),
+      new webpack.DefinePlugin({
+        MODULES: JSON.stringify(config.modules),
+        VERSION: JSON.stringify('DEVELOPMENT-0.0.1'),
+        LOCALE: JSON.stringify('ru')
+      }),
+      new webpack.ProvidePlugin({
+        React: 'react',
+        jQuery: 'jquery',
+        $: 'jquery',
+        'window.Tether': 'tether'
+      }),
+      new webpack.ContextReplacementPlugin(
+        /node_modules\/moment\/locale/,
+        new RegExp('ru')
+      ),
+      new webpack.optimize.CommonsChunkPlugin({
+        children: true
+      }),
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new HtmlWebpackPlugin({
+        title: 'Webpack application',
+        filename: 'index.html',
+        template: './index.html',
+        favicon: './favicon.ico',
+        minify: {
+          html5: true,
+          removeComments: true,
+          useShortDoctype: true,
+          removeTagWhitespace: true,
+          removeStyleLinkTypeAttributes: true,
+          removeScriptTypeAttributes: true,
+          removeRedundantAttributes: true,
+          removeOptionalTags: true,
+          processConditionalComments: true,
+          minifyCSS: true,
+          minifyJS: true,
+          keepClosingSlash: true,
+          collapseWhitespace: true
+        },
+        hash: true
+      })
+    ]
+  };
+}
