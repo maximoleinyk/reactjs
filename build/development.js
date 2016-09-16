@@ -1,7 +1,6 @@
 import path from 'path';
 import webpack from 'webpack';
 import autoprefixer from 'autoprefixer';
-import FlowStatusWebpackPlugin from 'flow-status-webpack-plugin';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 export default function (config) {
@@ -37,9 +36,21 @@ export default function (config) {
       chunkFilename: 'js/[name].js?hash=[hash]'
     },
 
-    resolve: config.resolve,
+		resolve: {
+	    alias: {
+	      css: path.resolve(config.src, './css'),
+	      app: path.resolve(config.src, './js/app'),
+	      common: path.resolve(config.src, './js/common')
+	    },
+	    modulesDirectories: ['node_modules', 'src/js'],
+	    extensions: ['', '.js', '.jsx', '.scss', '.css']
+	  },
 
-    resolveLoader: config.resolveModule,
+		resolveLoader: {
+	    modulesDirectories: ['node_modules'],
+	    moduleTemplates: ['*-loader'],
+	    extensions: ['', '.js', '.scss', '.css']
+	  },
 
     sassLoader: {
       data: '$fa-font-path: "~font-awesome/fonts";'
@@ -82,12 +93,9 @@ export default function (config) {
     },
 
     plugins: [
-      new FlowStatusWebpackPlugin({
-        failOnError: false
-      }),
       new webpack.DefinePlugin({
         MODULES: JSON.stringify(config.modules),
-        VERSION: JSON.stringify('DEVELOPMENT-0.0.1'),
+        VERSION: JSON.stringify('development'),
         LOCALE: JSON.stringify('ru')
       }),
       new webpack.ProvidePlugin({

@@ -13,7 +13,12 @@
     "transform-es3-member-expression-literals",
     "transform-es3-property-literals",
     "add-module-exports",
-    "react-html-attrs"
+    "react-html-attrs",
+    ["typecheck", {
+      "disable": {
+        "production": true
+      }
+    }]
 	],
 	"compact": true
 }
