@@ -8,7 +8,23 @@ export default function (config) {
     context: config.src,
 
     entry: {
-      start: './js/start'
+      start: './js/start',
+      vendor: [
+        'react',
+        'jquery',
+        'moment',
+        'react-redux',
+        'history',
+        'react-dom',
+        'react-router',
+        'react-redux',
+        'redux',
+        'redux-thunk',
+        'tether',
+        'whatwg-fetch',
+        'babel-polyfill',
+        'bootstrap/dist/js/bootstrap'
+      ]
     },
 
     devtool: 'source-map',
@@ -109,7 +125,9 @@ export default function (config) {
         new RegExp('ru')
       ),
       new webpack.optimize.CommonsChunkPlugin({
-        children: true
+        name: 'vendor',
+        filename: 'js/vendor.js',
+        minChunks: Infinity
       }),
       new webpack.optimize.OccurenceOrderPlugin(),
       new HtmlWebpackPlugin({
