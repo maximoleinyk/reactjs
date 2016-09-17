@@ -24,36 +24,36 @@ class Application {
 
   getChildRoutes(state, callback) {
     const notFoundRoute = <Route path="*" component={NotFound}></Route>;
-    const wasFound = this.config.modules.some((name) => {
-      if (!location.pathname.startsWith('/page/' + name)) {
-        return;
-      }
+      const wasFound = this.config.modules.some((name) => {
+        if (!location.pathname.startsWith('/page/' + name)) {
+          return;
+        }
 
-      require(`bundle!app/${name}/routes`)((module) => {
-        callback(null, [module(this.store), notFoundRoute]);
+        require(`bundle!app/${name}/routes`)((module) => {
+          callback(null, [module(this.store), notFoundRoute]);
+        });
+
+        return true;
       });
 
-      return true;
-    });
+      !wasFound && callback(null, [notFoundRoute]);
+    }
 
-    !wasFound && callback(null, [notFoundRoute]);
+    start() {
+      let router = (
+        <Router history={browserHistory}>
+          <Route path="/page" component={Layout}
+            getChildRoutes={this.getChildRoutes.bind(this)}
+            onEnter={this.isAuthenticated.bind(this)}>
+            <IndexRedirect to="/page/feed" />
+          </Route>
+        </Router>
+      );
+
+      $(document).ready(() => {
+        render(router, document.querySelector('#app') || document.body);
+      });
+    }
   }
 
-  start() {
-    let router = (
-      <Router history={browserHistory}>
-      <Route path="/page" component={Layout}
-      getChildRoutes={this.getChildRoutes.bind(this)}
-      onEnter={this.isAuthenticated.bind(this)}>
-      <IndexRedirect to="/page/feed" />
-      </Route>
-      </Router>
-    );
-
-    $(document).ready(() => {
-      render(router, document.querySelector('#app') || document.body);
-    });
-  }
-}
-
-export default Application;
+  export default Application;

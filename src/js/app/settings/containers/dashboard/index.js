@@ -15,7 +15,7 @@ class ProfileSettings extends Component {
     return (
       <div>
         <p>Profile settings</p>
-          <button onClick={this.openDashboard.bind(this)}>Back home</button>
+        <button onClick={this.openDashboard.bind(this)}>Back home</button>
         <h3 style={{color: 'white'}}>{this.state.time}</h3>
       </div>
     );

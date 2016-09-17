@@ -43,7 +43,7 @@ class Item extends Component {
       <div class="flex">
         <div class="flex-grow-1 ellipsis">
           <Input ref='input' handler={this.update.bind(this)}
-          defaultValue={this.props.item.text}/>
+            defaultValue={this.props.item.text}/>
         </div>
       </div>
     );
@@ -58,7 +58,7 @@ class Item extends Component {
         </a>
       </div>
     );
-
+    
     return this.state.readMode ? text : input;
   }
 

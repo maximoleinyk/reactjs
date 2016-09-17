@@ -1,15 +1,11 @@
 .git
 .idea
+.DS_Store
 .vagrant
-stats.json
+
 dist
 node_modules
-temp
-npm-debug.log
-.DS_Store
 coverage
-state.json
 
-src/js/vendor
-src/css/all.css.map
-src/css/all.css
+stats.json
+npm-debug.log

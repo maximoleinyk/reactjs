@@ -3,19 +3,19 @@ import Component from 'common/component';
 import {Form, Fieldset, TextBox} from 'common/components';
 
 class FeedBox extends Component {
-	render() {
+  render() {
     let {defaultValue} = this.props;
 
-		return (
-			<Form onSubmit={this.props.handler}>
-				<Fieldset legend={'new feed item'} srOnly={true}>
-					<TextBox ref='textBox' srOnly={true} label='message'
-          field="message" placeholder="Wazzaaaap?"
-          defaultValue={defaultValue}/>
-				</Fieldset>
-			</Form>
-		);
-	}
+    return (
+      <Form onSubmit={this.props.handler}>
+        <Fieldset legend={'new feed item'} srOnly={true}>
+          <TextBox ref='textBox' srOnly={true} label='message'
+            field="message" placeholder="Wazzaaaap?"
+            defaultValue={defaultValue}/>
+        </Fieldset>
+      </Form>
+    );
+  }
 
   componentDidMount() {
     this.refs.textBox.select();
@@ -34,13 +34,13 @@ class FeedBox extends Component {
     this.refs.textBox.enable();
   }
 
-	getValue() {
-		return this.refs.textBox.getValue().trim();
-	}
+  getValue() {
+    return this.refs.textBox.getValue().trim();
+  }
 
-	clear() {
-		this.refs.textBox.clear();
-	}
+  clear() {
+    this.refs.textBox.clear();
+  }
 
   select() {
     this.refs.textBox.select();
@@ -48,7 +48,7 @@ class FeedBox extends Component {
 }
 
 FeedBox.propTypes = {
-	handler: PropTypes.func.isRequired,
+  handler: PropTypes.func.isRequired,
   defaultValue: PropTypes.string
 };
 

@@ -1,12 +1,19 @@
-/*global require module */
+/*global require module process */
+
+const isProduction = process.env.NODE_ENV === 'production';
 
 module.exports = function(config) {
 	config.set({
-		singleRun: true,
-		port: 9876,
+		files: [
+			'test/index.js'
+		],
+
+		singleRun: isProduction,
+		autoWatch: !isProduction,
 		colors: true,
+		port: 9876,
 		logLevel: config.LOG_INFO,
-		autoWatch: true,
+
 		browsers: ['PhantomJS'],
 		frameworks: ['mocha', 'chai'],
 		plugins: [
@@ -18,15 +25,10 @@ module.exports = function(config) {
 			require("karma-spec-reporter"),
 			require("karma-coverage")
 		],
-		files: [
-			'test/index.js'
-		],
 		preprocessors: {
 			'test/index.js': ['webpack', 'sourcemap']
 		},
 		reporters: ['spec', 'coverage'],
-
-		/* webpack */
 		webpack: require('./build/karma.webpack'),
 		webpackMiddleware: {
 			noInfo: true

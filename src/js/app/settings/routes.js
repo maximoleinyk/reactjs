@@ -8,7 +8,9 @@ import reducer from './reducers';
 export default (store) => {
   replaceReducer(store, reducer);
 
-  return <Route path="settings" component={PageLayout} store={store}>
-    <IndexRoute component={Dashboard} />
-  </Route>
+  return (
+    <Route path="settings" component={PageLayout} store={store}>
+      <IndexRoute component={Dashboard} />
+    </Route>
+  );
 }

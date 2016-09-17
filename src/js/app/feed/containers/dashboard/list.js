@@ -20,29 +20,29 @@ class FeedList extends Component {
 
     if (!items.length) {
       return <div class=" text-sm-center">No items</div>;
-    }
-
-    let actions = bindActionCreators({ remove, update }, this.props.dispatch);
-
-    return (
-      <div>
-      {
-        items.map((item, i) => {
-          return <FeedItem key={i} item={item} {...actions}/>;
-        })
       }
-      </div>
-    );
+
+      let actions = bindActionCreators({ remove, update }, this.props.dispatch);
+
+      return (
+        <div>
+          {
+            items.map((item, i) => {
+              return <FeedItem key={i} item={item} {...actions}/>;
+            })
+          }
+        </div>
+      );
+    }
   }
-}
 
-FeedList.propTypes = {
-  data: PropTypes.shape({
-    items: PropTypes.array.isRequired,
-    isFetching: PropTypes.bool.isRequired
-  }).isRequired,
+  FeedList.propTypes = {
+    data: PropTypes.shape({
+      items: PropTypes.array.isRequired,
+      isFetching: PropTypes.bool.isRequired
+    }).isRequired,
 
-  dispatch: PropTypes.func.isRequired
-};
+    dispatch: PropTypes.func.isRequired
+  };
 
-export default connect(state => {return { data: state.feed }; })(FeedList);
+  export default connect(state => {return { data: state.feed }; })(FeedList);
