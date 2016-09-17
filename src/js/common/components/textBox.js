@@ -2,38 +2,50 @@ import {PropTypes} from 'react';
 import Component from 'common/component';
 
 class TextBox extends Component {
+	constructor() {
+		super();
+
+		this.state = {
+			disabled: false
+		};
+	}
 	render() {
 		let {field, label, srOnly, ...rest} = this.props;
 		let className = srOnly ? 'sr-only' : '';
 
 		return (
 			<div class="form-group">
-				<label class={className} htmlFor={field}>{label}</label>
-				<input ref='input' type="text" id={field} name={field}
-              class="form-control form-control-lg" {...rest}/>
+				<label class={className} for={field}>{label}</label>
+				<input type="text" id={field} name={field} ref='input'
+          class="form-control form-control-lg"
+          disabled={this.state.disabled} {...rest}/>
 			</div>
 		)
 	}
 
-  focus() {
-    this.refs.input.focus();
-  }
+	focus() {
+		this.refs.input.focus();
+	}
 
 	disable() {
-    this.refs.input.setAttribute('disabled', 'disabled');
-  }
+		this.setState({
+			disabled: true
+		});
+	}
 
-  enable() {
-    this.refs.input.removeAttribute('disabled');
-  }
+	enable() {
+		this.setState({
+			disabled: false
+		});
+	}
 
 	getValue() {
 		return this.refs.input.value;
 	}
 
-  select() {
-    return this.refs.input.select();
-  }
+	select() {
+		return this.refs.input.select();
+	}
 
 	clear() {
 		this.refs.input.value = '';

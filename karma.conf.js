@@ -12,14 +12,15 @@ module.exports = function(config) {
 		autoWatch: !isProduction,
 		colors: true,
 		port: 9876,
-		logLevel: config.LOG_INFO,
+		logLevel: config.LOG_ERROR,
 
 		browsers: ['PhantomJS'],
-		frameworks: ['mocha', 'chai'],
+		frameworks: ['mocha', 'chai', 'sinon'],
 		plugins: [
 			require('karma-webpack'),
-			require('karma-chai'),
 			require("karma-mocha"),
+			require('karma-chai'),
+      require('karma-sinon'),
 			require('karma-sourcemap-loader'),
 			require("karma-phantomjs-launcher"),
 			require("karma-spec-reporter"),

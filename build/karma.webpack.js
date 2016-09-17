@@ -5,7 +5,11 @@ autoprefixer = require('autoprefixer');
 
 module.exports = {
   devtool: 'inline-source-map',
-
+  externals: {
+    'cheerio': 'window',
+    'react/lib/ExecutionEnvironment': true,
+    'react/lib/ReactContext': true
+  },
   module: {
     loaders: [
       {
