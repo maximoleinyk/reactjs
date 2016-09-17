@@ -8,7 +8,11 @@ export default function (config) {
     context: config.src,
 
     entry: {
-      start: './js/start',
+      start: [
+        'webpack-dev-server/client?http://localhost:8080',
+        'webpack/hot/only-dev-server',
+        './js/start'
+      ],
       vendor: [
         'moment',
         'jquery',
@@ -29,6 +33,7 @@ export default function (config) {
     devtool: 'source-map',
 
     devServer: {
+      inline: true,
       host: 'localhost',
       port: '8080',
       proxy: [
@@ -92,7 +97,7 @@ export default function (config) {
       loaders: [
         {
           test: /\.(jsx|js)$/,
-          loaders: ['react-hot', 'babel'],
+          loaders: ['babel'],
           exclude: /node_modules/
         },
         {
@@ -108,6 +113,9 @@ export default function (config) {
     },
 
     plugins: [
+      new webpack.optimize.OccurenceOrderPlugin(),
+      new webpack.HotModuleReplacementPlugin(),
+      new webpack.NoErrorsPlugin(),
       new webpack.DefinePlugin({
         MODULES: JSON.stringify(config.modules),
         VERSION: JSON.stringify('development'),
@@ -128,7 +136,6 @@ export default function (config) {
         filename: 'js/vendor.js',
         chunks: ['start']
       }),
-      new webpack.optimize.OccurenceOrderPlugin(),
       new HtmlWebpackPlugin({
         title: 'Webpack application',
         filename: 'index.html',

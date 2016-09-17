@@ -3,6 +3,13 @@
 		"es2015",
 		"react"
 	],
+  "env": {
+    "development": {
+      "plugins": [
+        "react-hot-loader/babel"
+      ]
+    }
+  },
 	"plugins": [
 		"transform-object-rest-spread",
     "transform-class-properties",
